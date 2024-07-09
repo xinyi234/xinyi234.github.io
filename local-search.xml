@@ -4,6 +4,19 @@
   
   
   <entry>
+    <title></title>
+    <link href="/2024/07/09/ps_study/"/>
+    <url>/2024/07/09/ps_study/</url>
+    
+    <content type="html"><![CDATA[<h1 id="PS教程"><a href="#PS教程" class="headerlink" title="PS教程"></a>PS教程</h1><h2 id="认识界面"><a href="#认识界面" class="headerlink" title="认识界面"></a>认识界面</h2><p>![ps界面分区](C:\Users\lijia\Pictures\Screenshots\屏幕截图 2024-07-09 142245.png)</p><p>菜单栏：常用的命令  </p><p>选项栏：调节工具的参数  </p><p>左下方有图片的缩放比  </p><p>Ctrl+滚轮 或Shift+滚轮 可以左右移动  </p><p>Alt+滚轮 缩放画面</p><p>选择油漆桶工具(G)并设置前景色，按住Shift点击灰色工作面，可以改变工作面颜色，也可以右击工作面。  </p><p>菜单栏-窗口-工作区-复位基本功能  </p><h2 id="新建文档"><a href="#新建文档" class="headerlink" title="新建文档"></a>新建文档</h2><p>菜单栏-文件-新建（Ctrl+N)  </p><p>选择预设选项或手动输入参数  </p><p>1个像素是图象最小的单元点，显式图片以像素为单位  </p><p>分辨率的单位是像素每英寸，决定图片的清晰度  </p><p>![常用分辨率](C:\Users\lijia\Pictures\Screenshots\屏幕截图 2024-07-09 144234.png)</p><p>颜色模式：RGB 位数有8，16，32  CMYK适用于印刷  </p><p>前景色和背景色：点击左下方小按钮（D）恢复默认前景色背景色，右上方小按钮呼唤前景色和背景色  </p><p>高级选项：颜色配置文件和像素长宽比(以后再说) </p><h2 id="修改图像大小"><a href="#修改图像大小" class="headerlink" title="修改图像大小"></a>修改图像大小</h2><p>菜单栏-图像-图像大小(Alt+Ctrl+i)  </p><p>约束比例就是限制长宽比，取消勾选重新采样，就是固定像素大小  </p><p>总像素值&#x3D;宽度像素值*高度像素值&#x3D;高*宽*分辨率  </p><h2 id="保存文件"><a href="#保存文件" class="headerlink" title="保存文件"></a>保存文件</h2><p>打开文档：菜单栏-文件-打开 或双击黑色工作区  </p><p>png格式支持透明背景  </p><p>勾选图像序列，可以选择有规律的一系列图像 </p><p>保存文档：菜单栏-文件-存储(Ctrl+s)  </p><p>存储为(Ctrl+shift+s)  </p><p>关闭(Ctrl+W)  </p><h2 id="性能设置"><a href="#性能设置" class="headerlink" title="性能设置"></a>性能设置</h2><p>菜单栏-编辑-首选项(Ctrl+K)-暂存盘  </p><p>首选项-性能-历史记录状态  </p><p>菜单栏-窗口-历史记录工具  </p><p>自动保存设置：首选项-文件处理-设置自动储存时间间隔  </p><p>菜单栏-编辑-键盘快捷键(Ctrl+Alt+k)</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Hello World</title>
     <link href="/2024/07/03/hello-world/"/>
     <url>/2024/07/03/hello-world/</url>
