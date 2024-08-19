@@ -24,7 +24,7 @@
 <meta property="og:description" content="汇编语言计算机的组成数据和指令的表示 计算机中的数据和指令，存储在内存或磁盘中。 数据和指令都是二进制信息。  存储单元存储器被划分为若干个存储单元，每个存储单元从零开始编号。 总线计算机中专门连接cpu和其他芯片的导线成为总线。 地址总线：指定存储单元，地址总线宽度决定了可寻址的存储单元大小。 数据总线：数据总线宽度决定了cpu与外界的数据传送速度。 控制总线：是一些不同控制线的集合，数据总线的">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-07-20T00:54:50.000Z">
-<meta property="article:modified_time" content="2024-08-19T03:12:50.504Z">
+<meta property="article:modified_time" content="2024-08-19T03:50:40.805Z">
 <meta property="article:author" content="xinyi234">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -219,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.1k 字
+          2.3k 字
         
       </span>
     
@@ -230,7 +230,7 @@
         
         
         
-          18 分钟
+          20 分钟
         
       </span>
     
@@ -416,6 +416,19 @@
 <p>bx,bp区别：bx默认指ds段，bp默认值ss段</p>
 <h3 id="数据在哪里，有多长"><a href="#数据在哪里，有多长" class="headerlink" title="数据在哪里，有多长"></a>数据在哪里，有多长</h3><p>数据位置：1.立即数 2.寄存器  3.内存地址</p>
 <p>数据长度：字，字节，在没有寄存器参与的内存单元访问指令中用word ptr或byte ptr 指明</p>
+<h3 id="用div指令实现除法"><a href="#用div指令实现除法" class="headerlink" title="用div指令实现除法"></a>用div指令实现除法</h3><p>div是除法指令</p>
+<p>被除数：（默认）放在ax或dx和ax中</p>
+<p>除数：8位或16位，在寄存器或内存单元中</p>
+<p>指令格式：div 寄存器       div 内存单元</p>
+<p>商：al(8位)或ax(16位)</p>
+<p>余数：ah或dx</p>
+<p>在内存单元实施除法</p>
+<p>双字型数据的定义：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs assembly">data segment<br>	db 1 ;定义字节型数据01H，在data:0处，占一个字节<br>	dw 1 ;定义字型数据0001H，在data:1处，占2个字节<br>	dd 1 ;定义双字型数据00000001H，在data:3处，占4个字节<br>data ends<br></code></pre></td></tr></table></figure>
+
+<h3 id="用dup指令设置内存空间"><a href="#用dup指令设置内存空间" class="headerlink" title="用dup指令设置内存空间"></a>用dup指令设置内存空间</h3><p>dup和db,dw,dd等数据定义伪指令配合使用，进行数据重复</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs assembly">db 3 dup (0) ;相当于db 0,0,0<br>db 3 dup (0,1,2) ;相当于db 0,1,2,0,1,2,0,1,2<br>db 3 dup(&#x27;abc&#x27;,&#x27;ABC&#x27;) ;相当于db &#x27;abcABCabcABCabcABC&#x27;<br></code></pre></td></tr></table></figure>
+
 
                 
               </div>
