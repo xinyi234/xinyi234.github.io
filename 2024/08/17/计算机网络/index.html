@@ -1,0 +1,745 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="xinyi234">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="计算机网络概论1.1 什么是internet节点：主机及其上运行的应用程序   路由器、交换机等网络交换设备 边：通信链路 接入网链路：主机连接到互联网的链路 主干链路：路由器间的链路 互联网是TCP&#x2F;IP一簇协议为主的网络 互联网是分布式的应用进程及为应用进程提供通信服务的基础设施，基础设施包括主机应用层以下的协议实体 协议定义了在两个或多个通信实体之间交换的报文格式和次序，以及在报文">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机网络">
+<meta property="og:url" content="https://xinyi234.github.io/2024/08/17/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="计算机网络概论1.1 什么是internet节点：主机及其上运行的应用程序   路由器、交换机等网络交换设备 边：通信链路 接入网链路：主机连接到互联网的链路 主干链路：路由器间的链路 互联网是TCP&#x2F;IP一簇协议为主的网络 互联网是分布式的应用进程及为应用进程提供通信服务的基础设施，基础设施包括主机应用层以下的协议实体 协议定义了在两个或多个通信实体之间交换的报文格式和次序，以及在报文">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-08-17T03:55:19.000Z">
+<meta property="article:modified_time" content="2024-08-18T04:18:01.778Z">
+<meta property="article:author" content="xinyi234">
+<meta property="article:tag" content="计算机">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>计算机网络 - Hexo</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"xinyi234.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Xinyi</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="计算机网络"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-08-17 11:55" pubdate>
+          2024年8月17日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          14 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">计算机网络</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="计算机网络"><a href="#计算机网络" class="headerlink" title="计算机网络"></a>计算机网络</h1><h2 id="概论"><a href="#概论" class="headerlink" title="概论"></a>概论</h2><h3 id="1-1-什么是internet"><a href="#1-1-什么是internet" class="headerlink" title="1.1 什么是internet"></a>1.1 什么是internet</h3><p>节点：主机及其上运行的应用程序   路由器、交换机等网络交换设备</p>
+<p>边：通信链路</p>
+<p>接入网链路：主机连接到互联网的链路</p>
+<p>主干链路：路由器间的链路</p>
+<p>互联网是TCP&#x2F;IP一簇协议为主的网络</p>
+<p>互联网是分布式的应用进程及为应用进程提供通信服务的基础设施，基础设施包括主机应用层以下的协议实体</p>
+<p>协议定义了在两个或多个通信实体之间交换的报文格式和次序，以及在报文传输或接收或其他事件方面采取的动作</p>
+<p>主机&#x3D;端系统</p>
+<p>Internet标准：RFC， IETF</p>
+<h3 id="1-2网络边缘"><a href="#1-2网络边缘" class="headerlink" title="1.2网络边缘"></a>1.2网络边缘</h3><p>网络边缘：主机 应用程序</p>
+<p>网络核心：互连的路由器，网络中的网络</p>
+<p>接入网：有线或无线通信链路</p>
+<p>网络边缘接入网络核心</p>
+<p>客户&#x2F;服务器模式：客户端向服务器请求、接收服务。问题：可扩展性</p>
+<p>对等模式：很少专门的服务器，每个节点既是客户端也是服务器，如分布式文件分发系统</p>
+<p>面向连接的通信方式：在数据传输之前做好准备，只有端系统知道</p>
+<p>可靠性：不重复，不丢失，不失序</p>
+<p>TCP协议是有连接的，可靠的，具有拥塞控制的特性</p>
+<p>UDP协议是无连接的，不可靠，无流量控制，无拥塞控制</p>
+<h3 id="1-3网络核心"><a href="#1-3网络核心" class="headerlink" title="1.3网络核心"></a>1.3网络核心</h3><p>网络核心：路由器的网状网络</p>
+<p>电路交换：</p>
+<ul>
+<li><p>带宽被分成片（频分、时分、波分）</p>
+</li>
+<li><p>信令系统为两者的通信分配一条独享的线路</p>
+</li>
+<li><p>独享资源：不同享</p>
+</li>
+<li><p>每个呼叫一旦建立就能保证性能</p>
+</li>
+<li><p>如果没有数据发送，被分配的资源会浪费</p>
+</li>
+</ul>
+<p>频分：带宽比较宽，按频率频分多路复用</p>
+<p>时分：通讯能力按时间分</p>
+<p>波分：光纤通信，可用波段分为若干个</p>
+<p>电路交换用于电话，不适合计算机通信：</p>
+<ul>
+<li>连接建立时间长</li>
+<li>计算机之间的通信具有突发性，浪费片</li>
+<li>可靠性不高</li>
+</ul>
+<p>分组交换</p>
+<ul>
+<li>网络带宽资源不再分为一个个片，传输时使用全部带宽</li>
+<li>主机之间传输的数据被分为一个个分组</li>
+<li>先存储后转发</li>
+<li>延迟比电路交换多</li>
+<li>共享性</li>
+</ul>
+<p>排队和延迟：如果到达速率&gt;链路的输出速率：</p>
+<ul>
+<li>分组将会排队，等待输出</li>
+<li>如果路由器缓存用完了，分组将会被抛弃</li>
+</ul>
+<p>网络核心的关键功能：</p>
+<p>路由：决定分组采用的源到目标的路径</p>
+<p>转发：将分组从路由器的输入链路转移到输出链路</p>
+<p>分组交换：统计多路复用 ，允许更多用户使用网络</p>
+<p>分组交换按照有无网络层的连接，分成：</p>
+<ol>
+<li>数据报网络<ul>
+<li>分组的目标地址决定下一跳</li>
+<li>在不同的阶段，路由可以改变</li>
+<li>无须建立连接，有数据就传输</li>
+<li>无状态路由器，不维护主机的通信状态</li>
+</ul>
+</li>
+<li>虚电路网络<ul>
+<li>建立虚拟电路，带有标识</li>
+<li>建立网络层连接</li>
+<li>存储转发</li>
+</ul>
+</li>
+</ol>
+<h3 id="1-4接入网与物理媒体"><a href="#1-4接入网与物理媒体" class="headerlink" title="1.4接入网与物理媒体"></a>1.4接入网与物理媒体</h3><p>边缘网络通过接入网接入网络核心</p>
+<p>接入方式：</p>
+<ul>
+<li>modem：利用电话线接入互联网，将上网数据调制加载音频信号上，在电话线上传输，在局端将其中的数据解调出来，不能同时上网和打电话</li>
+<li>dsl:调制和解调，同样利用现存的电话线，DSL线路上的数据被传到互联网，语音被传到电话网，可以同时打电话和上网</li>
+<li>线缆网络：有线电视信号线缆双向改造  FDM：在不同频段传输不同信道的数据，数字电视和上网数据。<ul>
+<li>非对称：最高30Mbps的下行传输速率，2Mbps上行传输速率</li>
+<li>线缆和光纤网络将家庭用户接入到ISP 路由器</li>
+<li>各用户共享到线缆头端的接入网络</li>
+</ul>
+</li>
+<li>电缆模式</li>
+<li>企业接入网络：端系统经常直接接到以太网络交换机上  10Mbps,100Mbps1Gbps</li>
+<li>无线接入网络：各无线端系统共享无线接入网络（通过基站或接入点）<ul>
+<li>无线LANs：建筑物内部，802.11b&#x2F;g(WiFi):11，54Mbps传输速率</li>
+<li>广域无线接入：由电信运营商提供，1~10Mbps,4G 5G</li>
+</ul>
+</li>
+</ul>
+<p>物理媒体：</p>
+<ul>
+<li>在传输-接收对间传输比特</li>
+<li>物理链路：在每个传输-接收对，跨越一种物理媒体</li>
+<li>导引型媒体：信号沿着固体媒介被导引：同轴电缆、光纤、双绞线</li>
+<li>非导引型媒体：信号自由传播：无线电</li>
+<li>无线链路：开放空间传输电磁波。类型有地面微波、LAN、广域、卫星</li>
+</ul>
+<h3 id="1-5Internet结构和ISP"><a href="#1-5Internet结构和ISP" class="headerlink" title="1.5Internet结构和ISP"></a>1.5Internet结构和ISP</h3><p>互联网服务提供商ISP</p>
+<p>互联网内容提供商ICP</p>
+<p>端系统通过接入ISPs连接到互联网</p>
+<p>接入ISPs相应的必须是互联的，任何两个端系统可互相发送分组到对方，导致网络的网络非常复杂</p>
+<p>将每两个ISPs直接连接，不可扩展</p>
+<p>竞争：如果全局ISP是有利可为的业务，则会有竞争者</p>
+<p>合作：通过ISP之间的合作可以完成业务的扩展，肯定会有对等互联的结算关系</p>
+<p>业务会细分为全球接入和区域接入。</p>
+<p>ICP接入互联网要向ISP交费，然后ICP可能会构建自己的网络，将它们的服务、内容更加靠近端用户，向用户提供更好的服务，减少自己的运营支出</p>
+<p>Internet结构：松散的层次模型</p>
+<p>中心：第一层ISP ，国家&#x2F;国际覆盖，速率极高</p>
+<p>直接与其他第一层ISP相连，与大量第二层ISP和其他客户网络相连</p>
+<p>ISP之间的连接：</p>
+<ul>
+<li>POP：高层ISP面向客户网络的接入点，如一个低层ISP接入多个高层ISP，涉及费用结算</li>
+<li>对等接入：2个ISP对等互联</li>
+<li>IXP：多个对等ISP互联之处</li>
+<li>ICP：自己部署专用网络，同时与各级ISP连接</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" class="print-no-link">#计算机</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>计算机网络</div>
+      <div>https://xinyi234.github.io/2024/08/17/计算机网络/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>xinyi234</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年8月17日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2024/08/18/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" title="操作系统">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">操作系统</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/08/09/wp/" title="wp">
+                        <span class="hidden-mobile">wp</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
