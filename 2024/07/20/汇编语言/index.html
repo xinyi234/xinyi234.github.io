@@ -24,7 +24,7 @@
 <meta property="og:description" content="汇编语言计算机的组成数据和指令的表示 计算机中的数据和指令，存储在内存或磁盘中。 数据和指令都是二进制信息。  存储单元存储器被划分为若干个存储单元，每个存储单元从零开始编号。 总线计算机中专门连接cpu和其他芯片的导线成为总线。 地址总线：指定存储单元，地址总线宽度决定了可寻址的存储单元大小。 数据总线：数据总线宽度决定了cpu与外界的数据传送速度。 控制总线：是一些不同控制线的集合，数据总线的">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-07-20T00:54:50.000Z">
-<meta property="article:modified_time" content="2024-08-19T03:50:40.805Z">
+<meta property="article:modified_time" content="2024-08-20T03:01:13.768Z">
 <meta property="article:author" content="xinyi234">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -219,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.3k 字
+          2.8k 字
         
       </span>
     
@@ -230,7 +230,7 @@
         
         
         
-          20 分钟
+          24 分钟
         
       </span>
     
@@ -429,6 +429,39 @@
 <h3 id="用dup指令设置内存空间"><a href="#用dup指令设置内存空间" class="headerlink" title="用dup指令设置内存空间"></a>用dup指令设置内存空间</h3><p>dup和db,dw,dd等数据定义伪指令配合使用，进行数据重复</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs assembly">db 3 dup (0) ;相当于db 0,0,0<br>db 3 dup (0,1,2) ;相当于db 0,1,2,0,1,2,0,1,2<br>db 3 dup(&#x27;abc&#x27;,&#x27;ABC&#x27;) ;相当于db &#x27;abcABCabcABCabcABC&#x27;<br></code></pre></td></tr></table></figure>
 
+<h2 id="流程转移和子程序"><a href="#流程转移和子程序" class="headerlink" title="流程转移和子程序"></a>流程转移和子程序</h2><h3 id="转移综述"><a href="#转移综述" class="headerlink" title="转移综述"></a>转移综述</h3><p>实际中常需要改变程序的执行流程</p>
+<p>转移指令</p>
+<p>![p](D:\personal\blog\source_posts\汇编语言\屏幕截图 2024-08-20 095854.png)</p>
+<h3 id="操作符offset"><a href="#操作符offset" class="headerlink" title="操作符offset"></a>操作符offset</h3><p>用offset取得标号的偏移地址</p>
+<p>格式：offset 标号</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs assembly">assume cs:codesg<br>codesg segment<br>start:mov ax,offset start ;相当于mov ax,0<br>s:mov ax,offset s ;相当于mov ax,3<br>codesg ends<br>end start<br></code></pre></td></tr></table></figure>
+
+<h3 id="jmp指令-1"><a href="#jmp指令-1" class="headerlink" title="jmp指令"></a>jmp指令</h3><p>无条件转移，可以只修改ip,也可以同时修改cs,ip</p>
+<p>jmp指令要给出的两种信息：</p>
+<p>转移的目标地址</p>
+<p>转移的距离：</p>
+<ul>
+<li>段间转移（远转移）：jmp far ptr 标号</li>
+<li>段内短转移：jmp short 标号 ；ip修改范围-128~127</li>
+<li>段内近转移：jmp near ptr 标号 ；ip修改范围为-32768~32767</li>
+</ul>
+<p>jmp也可以根据位移转移，常见指令中的立即数在机器指令有所体现</p>
+<p>位移&#x3D;标号处的地址-jmp指令后下一条指令第一个字节的地址，用补码表示</p>
+<p>转移地址可以放在寄存器中   jmp ax</p>
+<p>转移地址在内存中</p>
+<ul>
+<li>jmp word ptr 内存单元地址    从内存单元地址处存放一个字，是目的偏移地址</li>
+<li>jmp dword ptr 内存单元地址    存放两个字，高地址处是目的段地址，低地址处是目的偏移地址</li>
+</ul>
+<p>在源程序中，不允许使用jmp 2000:0100 实现段间转移，这是在debug中使用的汇编指令，汇编编译器并不认识</p>
+<h3 id="其他转移指令"><a href="#其他转移指令" class="headerlink" title="其他转移指令"></a>其他转移指令</h3><p>jcxz 标号   当(cx)&#x3D;0时，则转移到标号</p>
+<p>所有的有条件转移指令都是短转移</p>
+<p>loop 标号    (cx)&#x3D;(cx)-1;当(cx)!&#x3D;0时转移到标号处执行</p>
+<p>在他们对应的机器码中不包含目的地址，而包含目的地址的位移</p>
+<ul>
+<li>如果loop s的机器码中包含的是s的地址，就对程序段在内存的偏移地址有了严格的限制，易引发错误</li>
+<li>当机器码中包含的是位移，无论s处的实际地址是多少，loop指令转移的相对位移是不变的</li>
+</ul>
 
                 
               </div>
