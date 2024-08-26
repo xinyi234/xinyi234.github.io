@@ -24,7 +24,7 @@
 <meta property="og:description" content="计算机网络概论1.1 什么是internet节点：主机及其上运行的应用程序   路由器、交换机等网络交换设备 边：通信链路 接入网链路：主机连接到互联网的链路 主干链路：路由器间的链路 互联网是TCP&#x2F;IP一簇协议为主的网络 互联网是分布式的应用进程及为应用进程提供通信服务的基础设施，基础设施包括主机应用层以下的协议实体 协议定义了在两个或多个通信实体之间交换的报文格式和次序，以及在报文">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-08-17T03:55:19.000Z">
-<meta property="article:modified_time" content="2024-08-20T10:10:16.051Z">
+<meta property="article:modified_time" content="2024-08-25T06:23:21.253Z">
 <meta property="article:author" content="xinyi234">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -219,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.2k 字
+          3.5k 字
         
       </span>
     
@@ -230,7 +230,7 @@
         
         
         
-          27 分钟
+          30 分钟
         
       </span>
     
@@ -514,6 +514,28 @@
 <p>![p](D:\personal\blog\source_posts\计算机网络\屏幕截图 2024-08-20 180236.png)</p>
 <p>tcp,udp都没有加密，明文通过互联网传输</p>
 <p>SSL：在TCP上实现，提供加密的TCP连接，在应用层</p>
+<h3 id="2-2-Web-and-HTTP"><a href="#2-2-Web-and-HTTP" class="headerlink" title="2.2 Web and HTTP"></a>2.2 Web and HTTP</h3><p>Web页：由一些对象组成</p>
+<p>对象可以是html文件，jpeg图像，java小程序，声音剪辑文件</p>
+<p>通过url对每个对象进行引用</p>
+<p>http:超文本传输协议，web的应用层协议，客户&#x2F;服务器模式</p>
+<p>http跑在tcp之上。客户发起一个与服务器的tcp连接，端口号为80，服务器接受客户的tcp连接，在浏览器与服务器交换报文，连接关闭。无状态服务器。</p>
+<p>http&#x2F;1.0 非持久连接    http&#x2F;1.1持久连接</p>
+<p>请求方式：非流水线方式，流水线方式</p>
+<p>http请求报文：ascii可读</p>
+<p>提交表单输入：</p>
+<ul>
+<li>post方式：网页通常包括表单输入，包含在实体主体中的输入被提交到服务器</li>
+<li>url方式：get方式，输入通过请求行的url字段上载</li>
+</ul>
+<p>cookies维护客户端-服务端状态</p>
+<p>4个组成部分：</p>
+<ol>
+<li>在HTTP响应报文中有一个cookie的首部行</li>
+<li>在HTTP 请求报文含有一个cookie的首部行</li>
+<li>用户端系统图保留一个cookie文件，由用户的浏览器管理</li>
+<li>web站点有一个后端数据库</li>
+</ol>
+<p>web缓存（代理服务器）：用户设置浏览器通过缓存访问web，浏览器将所有http请求发给缓存，如果对象在缓存，直接返回对象，如果不在，缓存请求原始服务器，再返回对象</p>
 
                 
               </div>
