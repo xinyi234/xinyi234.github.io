@@ -4,6 +4,25 @@
   
   
   <entry>
+    <title>NEMU PA1</title>
+    <link href="/2024/08/27/NEMU-PA1/"/>
+    <url>/2024/08/27/NEMU-PA1/</url>
+    
+    <content type="html"><![CDATA[<h1 id="阶段1"><a href="#阶段1" class="headerlink" title="阶段1"></a>阶段1</h1><h3 id="思考题1"><a href="#思考题1" class="headerlink" title="思考题1"></a>思考题1</h3><p>opcode_table是一个函数指针数组</p><p>定义在nemu&#x2F;src&#x2F;cpu&#x2F;exec&#x2F;exec.c文件</p><p>![p](D:\personal\blog\source_posts\NEMU-PA1\屏幕截图 2024-08-27 120928.png)</p><p>opcode_table数组为helper_fun类型，在同一文件看到了helper_fun的定义为：</p><p>![p](D:\personal\blog\source_posts\NEMU-PA1\屏幕截图 2024-08-27 121017.png)</p><p>typedef 返回类型 （*新类型)(参数表)，此处typedef的功能是定义新的helper_fun类型，并定义这种类型为指向某种函数的指针，这种函数有一个swaddr_t参数并返回int类型。</p><h3 id="思考题2"><a href="#思考题2" class="headerlink" title="思考题2"></a>思考题2</h3><p>cpu_exec()在nemu&#x2F;src&#x2F;monitor&#x2F;cpu-exec.c中</p><p>![p](D:\personal\blog\source_posts\NEMU-PA1\屏幕截图 2024-08-27 193928.png)</p><p>n的类型是无符号整数，-1是最大的数，所以for循环可以执行最大次数的循环，可以执行完指令。</p><h2 id="必做任务1-实现正确的寄存器结构体"><a href="#必做任务1-实现正确的寄存器结构体" class="headerlink" title="必做任务1- 实现正确的寄存器结构体"></a>必做任务1- 实现正确的寄存器结构体</h2><p>结构体和联合体</p><ul><li>结构体各自拥有自己的内存，同时存在，遵循内存对齐原则。一个struct变量的总长度等于所有成员长度之和</li><li>联合体各成员共用一块内存空间，同时只用一个成员可以得到内存的使用权，各变量共用一个内存首地址。union的总长度至少能容纳最大的成员变量，并且是所有成员变量大小的整数倍</li></ul><p>寄存器eax,ax,ah,al 具有内存共用的关系，应该设计成联合体而不是结构体。</p><p>而不同的32位寄存器之间是独立的，应该设计成结构体。</p><p>![p](D:\personal\blog\source_posts\NEMU-PA1\屏幕截图 2024-08-27 235704.png)</p><hr><p>解析命令</p><p>[readline库](<a href="https://blog.csdn.net/xuancbm/article/details/81436681">readline库的简单使用_libreadline c语言接口-CSDN博客</a>)</p><p><a href="%5B%E7%94%A8%E4%BA%BA%E8%AF%9D%E8%AE%B2%E6%87%82strtok%E5%87%BD%E6%95%B0%E7%9A%84%E7%90%86%E8%A7%A3%E5%92%8C%E4%BD%BF%E7%94%A8-CSDN%E5%8D%9A%E5%AE%A2%5D(https://blog.csdn.net/2302_80198073/article/details/135729196)">strtok函数</a></p><h2 id="必做任务2：实现单步执行，打印寄存器，扫描内存"><a href="#必做任务2：实现单步执行，打印寄存器，扫描内存" class="headerlink" title="必做任务2：实现单步执行，打印寄存器，扫描内存"></a>必做任务2：实现单步执行，打印寄存器，扫描内存</h2><h3 id="单步执行"><a href="#单步执行" class="headerlink" title="单步执行"></a>单步执行</h3><p>源代码中c,q,help 命令已经实现</p><p>cmd_c函数定义在 nemu&#x2F;src&#x2F;monitor&#x2F;debug&#x2F;ui.c 中</p><p>参考它的函数，我只需要把-1改成si 后面的参数</p><p>![p](D:\personal\blog\source_posts\NEMU-PA1\屏幕截图 2024-08-28 111001.png)</p><p>再把si命令加入结构体中就好了</p><p>若args为NULL,默认i&#x3D;1； 若i&lt;-1,提示错误； 若i&gt;&#x3D;-1,当i&gt;10时没能输出结果，需要修改nemu&#x2F;src&#x2F;monitor&#x2F;cpu-exec.c文件中的<code>#define MAX_INSTR_TO_PRINT 10</code>中的10改为最大值。</p><h3 id="打印寄存器"><a href="#打印寄存器" class="headerlink" title="打印寄存器"></a>打印寄存器</h3><p>我们在nemu&#x2F;include&#x2F;cpu&#x2F;reg.h中实现了寄存器的结构，寄存器包括8个32位通用寄存器和eip寄存器，还有很多标志寄存器</p><p>![p](D:\personal\blog\source_posts\NEMU-PA1\屏幕截图 2024-08-28 112214.png)</p><p>我可以用枚举数组打印寄存器的值，每一个数组成员都有一个默认值，从零开始依次加1，所以最后一个成员值加一就是数组长度</p><p>![p](D:\personal\blog\source_posts\NEMU-PA1\屏幕截图 2024-08-28 112237.png)</p><p>利用这些定义宏可以求寄存器的值</p><p>![p](D:\personal\blog\source_posts\NEMU-PA1\屏幕截图 2024-08-28 115536.png)</p><p>小插曲：之前我用 for(int i&#x3D;&amp;,i&lt;&amp;,i++)语法时报错：</p><p>![p](D:\personal\blog\source_posts\NEMU-PA1\屏幕截图 2024-08-28 114729.png)</p><p>循环初始声明只允许在C99模式下。</p><p>print(“0x%8x”) 表示输出一个16进制数，数字为8位，不足8位用0补齐</p><h3 id="扫描内存"><a href="#扫描内存" class="headerlink" title="扫描内存"></a>扫描内存</h3><p>命令格式为： x  个数n   起始地址</p><p>就是将从起始地址处接下来的n个地址的值打印出来</p><p>调用访存函数swaddr_read()(位于nemu&#x2F;src&#x2F;memory&#x2F;memory.c中)</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>计算机</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>kali使用metasploit</title>
     <link href="/2024/08/25/kali%E4%BD%BF%E7%94%A8metasploit/"/>
     <url>/2024/08/25/kali%E4%BD%BF%E7%94%A8metasploit/</url>

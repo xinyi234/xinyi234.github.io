@@ -16,21 +16,21 @@
   <meta name="author" content="xinyi234">
   <meta name="keywords" content="">
   
-    <meta name="description" content="在kali中 metasploit主要使用PostgreSQL数据库存储数据，在使用时需要启动PostgreSQL数据库 打开Kali 并且在终端内输入以下命令 来激活metasploit 自带数据库postgresql 。如果你使用的不是root终端命令前必须添加“sudo” 1sudo systemctl start postgresql  第一次使用要初始化数据库 1sudo msfdb i">
+    <meta name="description" content="阶段1思考题1opcode_table是一个函数指针数组 定义在nemu&#x2F;src&#x2F;cpu&#x2F;exec&#x2F;exec.c文件 ![p](D:\personal\blog\source_posts\NEMU-PA1\屏幕截图 2024-08-27 120928.png) opcode_table数组为helper_fun类型，在同一文件看到了helper_fun的定义">
 <meta property="og:type" content="article">
-<meta property="og:title" content="kali使用metasploit">
-<meta property="og:url" content="https://xinyi234.github.io/2024/08/25/kali%E4%BD%BF%E7%94%A8metasploit/index.html">
+<meta property="og:title" content="NEMU PA1">
+<meta property="og:url" content="https://xinyi234.github.io/2024/08/27/NEMU-PA1/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="在kali中 metasploit主要使用PostgreSQL数据库存储数据，在使用时需要启动PostgreSQL数据库 打开Kali 并且在终端内输入以下命令 来激活metasploit 自带数据库postgresql 。如果你使用的不是root终端命令前必须添加“sudo” 1sudo systemctl start postgresql  第一次使用要初始化数据库 1sudo msfdb i">
+<meta property="og:description" content="阶段1思考题1opcode_table是一个函数指针数组 定义在nemu&#x2F;src&#x2F;cpu&#x2F;exec&#x2F;exec.c文件 ![p](D:\personal\blog\source_posts\NEMU-PA1\屏幕截图 2024-08-27 120928.png) opcode_table数组为helper_fun类型，在同一文件看到了helper_fun的定义">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-08-25T13:38:10.000Z">
-<meta property="article:modified_time" content="2024-08-25T14:09:07.104Z">
+<meta property="article:published_time" content="2024-08-27T03:48:20.000Z">
+<meta property="article:modified_time" content="2024-08-28T11:09:29.007Z">
 <meta property="article:author" content="xinyi234">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>kali使用metasploit - Hexo</title>
+  <title>NEMU PA1 - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -196,7 +196,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="kali使用metasploit"></span>
+            <span id="subtitle" data-typed-text="NEMU PA1"></span>
           
         </div>
 
@@ -207,8 +207,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-08-25 21:38" pubdate>
-          2024年8月25日 晚上
+        <time datetime="2024-08-27 11:48" pubdate>
+          2024年8月27日 中午
         </time>
       </span>
     
@@ -219,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          88 字
+          886 字
         
       </span>
     
@@ -230,7 +230,7 @@
         
         
         
-          1 分钟
+          8 分钟
         
       </span>
     
@@ -267,19 +267,51 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">kali使用metasploit</h1>
+            <h1 id="seo-header">NEMU PA1</h1>
             
             
               <div class="markdown-body">
                 
-                <p>在kali中 metasploit主要使用PostgreSQL数据库存储数据，在使用时需要启动PostgreSQL数据库</p>
-<p>打开Kali 并且在终端内输入以下命令 来激活metasploit 自带数据库postgresql 。如果你使用的不是root终端命令前必须添加“sudo”</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">sudo systemctl start postgresql<br></code></pre></td></tr></table></figure>
-
-<p>第一次使用要初始化数据库</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">sudo msfdb init<br></code></pre></td></tr></table></figure>
-
-<p>输入 msfconsole 进入控制中心</p>
+                <h1 id="阶段1"><a href="#阶段1" class="headerlink" title="阶段1"></a>阶段1</h1><h3 id="思考题1"><a href="#思考题1" class="headerlink" title="思考题1"></a>思考题1</h3><p>opcode_table是一个函数指针数组</p>
+<p>定义在nemu&#x2F;src&#x2F;cpu&#x2F;exec&#x2F;exec.c文件</p>
+<p>![p](D:\personal\blog\source_posts\NEMU-PA1\屏幕截图 2024-08-27 120928.png)</p>
+<p>opcode_table数组为helper_fun类型，在同一文件看到了helper_fun的定义为：</p>
+<p>![p](D:\personal\blog\source_posts\NEMU-PA1\屏幕截图 2024-08-27 121017.png)</p>
+<p>typedef 返回类型 （*新类型)(参数表)，此处typedef的功能是定义新的helper_fun类型，并定义这种类型为指向某种函数的指针，这种函数有一个swaddr_t参数并返回int类型。</p>
+<h3 id="思考题2"><a href="#思考题2" class="headerlink" title="思考题2"></a>思考题2</h3><p>cpu_exec()在nemu&#x2F;src&#x2F;monitor&#x2F;cpu-exec.c中</p>
+<p>![p](D:\personal\blog\source_posts\NEMU-PA1\屏幕截图 2024-08-27 193928.png)</p>
+<p>n的类型是无符号整数，-1是最大的数，所以for循环可以执行最大次数的循环，可以执行完指令。</p>
+<h2 id="必做任务1-实现正确的寄存器结构体"><a href="#必做任务1-实现正确的寄存器结构体" class="headerlink" title="必做任务1- 实现正确的寄存器结构体"></a>必做任务1- 实现正确的寄存器结构体</h2><p>结构体和联合体</p>
+<ul>
+<li>结构体各自拥有自己的内存，同时存在，遵循内存对齐原则。一个struct变量的总长度等于所有成员长度之和</li>
+<li>联合体各成员共用一块内存空间，同时只用一个成员可以得到内存的使用权，各变量共用一个内存首地址。union的总长度至少能容纳最大的成员变量，并且是所有成员变量大小的整数倍</li>
+</ul>
+<p>寄存器eax,ax,ah,al 具有内存共用的关系，应该设计成联合体而不是结构体。</p>
+<p>而不同的32位寄存器之间是独立的，应该设计成结构体。</p>
+<p>![p](D:\personal\blog\source_posts\NEMU-PA1\屏幕截图 2024-08-27 235704.png)</p>
+<hr>
+<p>解析命令</p>
+<p>[readline库](<a target="_blank" rel="noopener" href="https://blog.csdn.net/xuancbm/article/details/81436681">readline库的简单使用_libreadline c语言接口-CSDN博客</a>)</p>
+<p><a href="%5B%E7%94%A8%E4%BA%BA%E8%AF%9D%E8%AE%B2%E6%87%82strtok%E5%87%BD%E6%95%B0%E7%9A%84%E7%90%86%E8%A7%A3%E5%92%8C%E4%BD%BF%E7%94%A8-CSDN%E5%8D%9A%E5%AE%A2%5D(https://blog.csdn.net/2302_80198073/article/details/135729196)">strtok函数</a></p>
+<h2 id="必做任务2：实现单步执行，打印寄存器，扫描内存"><a href="#必做任务2：实现单步执行，打印寄存器，扫描内存" class="headerlink" title="必做任务2：实现单步执行，打印寄存器，扫描内存"></a>必做任务2：实现单步执行，打印寄存器，扫描内存</h2><h3 id="单步执行"><a href="#单步执行" class="headerlink" title="单步执行"></a>单步执行</h3><p>源代码中c,q,help 命令已经实现</p>
+<p>cmd_c函数定义在 nemu&#x2F;src&#x2F;monitor&#x2F;debug&#x2F;ui.c 中</p>
+<p>参考它的函数，我只需要把-1改成si 后面的参数</p>
+<p>![p](D:\personal\blog\source_posts\NEMU-PA1\屏幕截图 2024-08-28 111001.png)</p>
+<p>再把si命令加入结构体中就好了</p>
+<p>若args为NULL,默认i&#x3D;1； 若i&lt;-1,提示错误； 若i&gt;&#x3D;-1,当i&gt;10时没能输出结果，需要修改nemu&#x2F;src&#x2F;monitor&#x2F;cpu-exec.c文件中的<code>#define MAX_INSTR_TO_PRINT 10</code>中的10改为最大值。</p>
+<h3 id="打印寄存器"><a href="#打印寄存器" class="headerlink" title="打印寄存器"></a>打印寄存器</h3><p>我们在nemu&#x2F;include&#x2F;cpu&#x2F;reg.h中实现了寄存器的结构，寄存器包括8个32位通用寄存器和eip寄存器，还有很多标志寄存器</p>
+<p>![p](D:\personal\blog\source_posts\NEMU-PA1\屏幕截图 2024-08-28 112214.png)</p>
+<p>我可以用枚举数组打印寄存器的值，每一个数组成员都有一个默认值，从零开始依次加1，所以最后一个成员值加一就是数组长度</p>
+<p>![p](D:\personal\blog\source_posts\NEMU-PA1\屏幕截图 2024-08-28 112237.png)</p>
+<p>利用这些定义宏可以求寄存器的值</p>
+<p>![p](D:\personal\blog\source_posts\NEMU-PA1\屏幕截图 2024-08-28 115536.png)</p>
+<p>小插曲：之前我用 for(int i&#x3D;&amp;,i&lt;&amp;,i++)语法时报错：</p>
+<p>![p](D:\personal\blog\source_posts\NEMU-PA1\屏幕截图 2024-08-28 114729.png)</p>
+<p>循环初始声明只允许在C99模式下。</p>
+<p>print(“0x%8x”) 表示输出一个16进制数，数字为8位，不足8位用0补齐</p>
+<h3 id="扫描内存"><a href="#扫描内存" class="headerlink" title="扫描内存"></a>扫描内存</h3><p>命令格式为： x  个数n   起始地址</p>
+<p>就是将从起始地址处接下来的n个地址的值打印出来</p>
+<p>调用访存函数swaddr_read()(位于nemu&#x2F;src&#x2F;memory&#x2F;memory.c中)</p>
 
                 
               </div>
@@ -298,7 +330,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/" class="category-chain-item">网络安全</a>
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA/" class="category-chain-item">计算机</a>
   
   
 
@@ -318,8 +350,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>kali使用metasploit</div>
-      <div>https://xinyi234.github.io/2024/08/25/kali使用metasploit/</div>
+      <div>NEMU PA1</div>
+      <div>https://xinyi234.github.io/2024/08/27/NEMU-PA1/</div>
     </div>
     <div class="license-meta">
       
@@ -331,7 +363,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年8月25日</div>
+          <div>2024年8月27日</div>
         </div>
       
       
@@ -363,18 +395,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/08/27/NEMU-PA1/" title="NEMU PA1">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">NEMU PA1</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/08/18/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" title="操作系统">
-                        <span class="hidden-mobile">操作系统</span>
+                      <a href="/2024/08/25/kali%E4%BD%BF%E7%94%A8metasploit/" title="kali使用metasploit">
+                        <span class="hidden-mobile">kali使用metasploit</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
