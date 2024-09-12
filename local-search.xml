@@ -8,7 +8,7 @@
     <link href="/2024/09/11/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/"/>
     <url>/2024/09/11/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/</url>
     
-    <content type="html"><![CDATA[<h2 id="1-php面向对象"><a href="#1-php面向对象" class="headerlink" title="1. php面向对象"></a>1. php面向对象</h2><p>对象是类的实例，构成是成员变量和成员函数。</p><p>$this是在类里面调用当前类</p><p>实例化类用new关键字</p><p>新定义的对象直接给变量赋值，对象不能直接用echo和print输出，可以用var_dump和print_r,对象里不会呈现成员方法</p><p>类的修饰符包括public,protected,private</p><h2 id="2-序列化基本知识"><a href="#2-序列化基本知识" class="headerlink" title="2. 序列化基本知识"></a>2. 序列化基本知识</h2><p>序列化是将对象的属性转化为可以存储和运输的形式</p><p>类型：名称长度：名字：成员数量：{属性类型：长度：值；}</p><p>只序列化成员变量，私有属性在属性前加上%00类名%00，protected受保护属性序列化时，在变量名前加%00*%00</p><p>url编码 urlencode()</p><p>序列化 serialize()</p><h2 id="3-反序列化基本知识"><a href="#3-反序列化基本知识" class="headerlink" title="3. 反序列化基本知识"></a>3. 反序列化基本知识</h2><p>反序列化之后的内容为1个对象，对象的值由反序列化里的值提供，反序列化不触发类的成员方法，需要调用方法</p><p>记得修改变量时修改字符串长度</p><p>url解码 urldecode()</p><p>反序列化 unserialize()</p><h2 id="4-魔术方法"><a href="#4-魔术方法" class="headerlink" title="4. 魔术方法"></a>4. 魔术方法</h2><p>在特定情况下自动触发的行为方法</p><p>漏洞成因：unserialize()接收的值可控</p><p>实例化对象时触发构造函数__construct()</p><p>对象所有的引用被删除或对象被显式销毁时执行__destruct(),在反序列化之后会执行</p><p>在序列化之前会触发__sleep(),可用于清理对象，并返回一个包含对象中所有应被序列化的变量名称的数组</p><p>在反序列化之前触发__wakeup()</p><p>把对象当成字符串调用触发__toString()</p><p>调用对象可以使用print_r或var_dump,如果使用echo或print只能调用字符串的方法去调用对象，会触发toString()</p><p>把对象当成函数调用触发__invoke()</p><p>调用一个不存在的方法时触发__call($arg1,$arg2)</p><p>调用不存在的成员属性时触发__get($arg1)</p><p>给不存在的成员属性赋值__set($arg1,$arg2)</p><p>对不可访问属性使用isset()或empty()时，__isset()会被调用</p><p>__unset()差不多</p>]]></content>
+    <content type="html"><![CDATA[<h2 id="1-php面向对象"><a href="#1-php面向对象" class="headerlink" title="1. php面向对象"></a>1. php面向对象</h2><p>对象是类的实例，构成是成员变量和成员函数。</p><p>$this是在类里面调用当前类</p><p>实例化类用new关键字</p><p>新定义的对象直接给变量赋值，对象不能直接用echo和print输出，可以用var_dump和print_r,对象里不会呈现成员方法</p><p>类的修饰符包括public,protected,private</p><h2 id="2-序列化基本知识"><a href="#2-序列化基本知识" class="headerlink" title="2. 序列化基本知识"></a>2. 序列化基本知识</h2><p>序列化是将对象的属性转化为可以存储和运输的形式</p><p>类型：名称长度：名字：成员数量：{属性类型：长度：值；}</p><p>只序列化成员变量，私有属性在属性前加上%00类名%00，protected受保护属性序列化时，在变量名前加%00*%00</p><p>url编码 urlencode()</p><p>序列化 serialize()</p><h2 id="3-反序列化基本知识"><a href="#3-反序列化基本知识" class="headerlink" title="3. 反序列化基本知识"></a>3. 反序列化基本知识</h2><p>反序列化之后的内容为1个对象，对象的值由反序列化里的值提供，反序列化不触发类的成员方法，需要调用方法</p><p>记得修改变量时修改字符串长度</p><p>url解码 urldecode()</p><p>反序列化 unserialize()</p><h2 id="4-魔术方法"><a href="#4-魔术方法" class="headerlink" title="4. 魔术方法"></a>4. 魔术方法</h2><p>在特定情况下自动触发的行为方法</p><p>触发前提：魔术方法所在类被调用</p><p>漏洞成因：unserialize()接收的值可控</p><p>实例化对象时触发构造函数__construct()</p><p>对象所有的引用被删除或对象被显式销毁时执行__destruct(),在反序列化之后会执行</p><p>在序列化之前会触发__sleep(),可用于清理对象，并返回一个包含对象中所有应被序列化的变量名称的数组</p><p>在反序列化之前触发__wakeup()</p><p>把对象当成字符串调用触发__toString()</p><p>调用对象可以使用print_r或var_dump,如果使用echo或print只能调用字符串的方法去调用对象，会触发toString()</p><p>把对象当成函数调用触发__invoke()</p><p>调用一个不存在的方法时触发__call($arg1,$arg2)</p><p>调用不存在的成员属性时触发__get($arg1)</p><p>给不存在的成员属性赋值__set($arg1,$arg2)</p><p>对不可访问属性使用isset()或empty()时，__isset()会被调用</p><p>对不可访问属性使用unset时调用__unset()</p><p>使用clone关键字拷贝完成一个对象后自动调用__clone()</p><h2 id="5-POP链"><a href="#5-POP链" class="headerlink" title="5. POP链"></a>5. POP链</h2><p>怎么用代码写序列化字符串</p>]]></content>
     
     
     <categories>
@@ -93,6 +93,8 @@
       
       <category>网络安全</category>
       
+      <category>wp</category>
+      
     </categories>
     
     
@@ -170,25 +172,6 @@
     <categories>
       
       <category>计算机</category>
-      
-    </categories>
-    
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>PS教程</title>
-    <link href="/2024/07/10/PS%E6%95%99%E7%A8%8B/"/>
-    <url>/2024/07/10/PS%E6%95%99%E7%A8%8B/</url>
-    
-    <content type="html"><![CDATA[<h1 id="PS教程"><a href="#PS教程" class="headerlink" title="PS教程"></a>PS教程</h1><h2 id="认识界面"><a href="#认识界面" class="headerlink" title="认识界面"></a>认识界面</h2><p>![ps界面分区](D:\personal\blog\source_posts\PS教程\屏幕截图 2024-07-09 142245.png)</p><p>菜单栏：常用的命令  </p><p>选项栏：调节工具的参数  </p><p>左下方有图片的缩放比  </p><p>Ctrl+滚轮 或Shift+滚轮 可以左右移动  </p><p>Alt+滚轮 缩放画面</p><p>选择油漆桶工具(G)并设置前景色，按住Shift点击灰色工作面，可以改变工作面颜色，也可以右击工作面。  </p><p>菜单栏-窗口-工作区-复位基本功能  </p><h2 id="新建文档"><a href="#新建文档" class="headerlink" title="新建文档"></a>新建文档</h2><p>菜单栏-文件-新建（Ctrl+N)  </p><p>选择预设选项或手动输入参数  </p><p>1个像素是图象最小的单元点，显式图片以像素为单位  </p><p>分辨率的单位是像素每英寸，决定图片的清晰度  </p><p>![常用分辨率](D:\personal\blog\source_posts\PS教程\屏幕截图 2024-07-09 144234.png)</p><p>颜色模式：RGB 位数有8，16，32  CMYK适用于印刷  </p><p>前景色和背景色：点击左下方小按钮（D）恢复默认前景色背景色，右上方小按钮呼唤前景色和背景色  </p><p>高级选项：颜色配置文件和像素长宽比(以后再说) </p><h2 id="修改图像大小"><a href="#修改图像大小" class="headerlink" title="修改图像大小"></a>修改图像大小</h2><p>菜单栏-图像-图像大小(Alt+Ctrl+i)  </p><p>约束比例就是限制长宽比，取消勾选重新采样，就是固定像素大小  </p><p>总像素值&#x3D;宽度像素值*高度像素值&#x3D;高*宽*分辨率  </p><h2 id="保存文件"><a href="#保存文件" class="headerlink" title="保存文件"></a>保存文件</h2><p>打开文档：菜单栏-文件-打开 或双击黑色工作区  </p><p>png格式支持透明背景  </p><p>勾选图像序列，可以选择有规律的一系列图像 </p><p>保存文档：菜单栏-文件-存储(Ctrl+s)  </p><p>存储为(Ctrl+shift+s)  </p><p>关闭(Ctrl+W)  </p><h2 id="性能设置"><a href="#性能设置" class="headerlink" title="性能设置"></a>性能设置</h2><p>菜单栏-编辑-首选项(Ctrl+K)-暂存盘  </p><p>首选项-性能-历史记录状态  </p><p>菜单栏-窗口-历史记录工具  </p><p>自动保存设置：首选项-文件处理-设置自动储存时间间隔  </p><p>菜单栏-编辑-键盘快捷键(Ctrl+Alt+k)  </p><h2 id="图层基本知识"><a href="#图层基本知识" class="headerlink" title="图层基本知识"></a>图层基本知识</h2><p>菜单栏-图层</p><p>图层面板：菜单栏-窗口-图层</p><p>图层面板有类型搜索和筛选，列表列出所有图层，安上下叠加顺序排列</p><p>图层分类：普通图层，背景图层，智能对象图层，调整图层，填充图层，视频图层，矢量图层，3D图层，文字图层</p><p>Ctrl+Shift+N 新建图层</p><p>Ctrl+j 复制图层</p><p>移动图层 Ctrl+[ 后移</p><h2 id="视图放缩"><a href="#视图放缩" class="headerlink" title="视图放缩"></a>视图放缩</h2><p>左下角有画面比例</p><p>工具栏的抓手工具来拖动画面，选项栏调整参数</p><p>按住空格键不松会出现抓手工具</p><p>工具栏的缩放工具，勾住细微缩放，可以连续缩放</p><p>双击抓手工具实现缩放</p><p>Ait+滚轮</p><p>Ctrl+ +号放大</p><p>也可以用鼠标右键</p><h2 id="移动工具"><a href="#移动工具" class="headerlink" title="移动工具"></a>移动工具</h2><p>快捷键V</p><p>自动选择 按住Ctrl键可以临时换成自动选择，Shift键约束角度，方向键微调，shift+方向键速度变快</p><h2 id="选区知识"><a href="#选区知识" class="headerlink" title="选区知识"></a>选区知识</h2><p>矩形选框工具，shift,alt</p><p>移动选区用鼠标</p><p>Ctrl+D或在选区外点击取消选区，Ctrl+shift+D 重新选择</p><p>Ctrl+H 隐藏选区</p><p>右击存储选区，载入选区</p><h3 id="选框工具"><a href="#选框工具" class="headerlink" title="选框工具"></a>选框工具</h3><p>矩形选框工具的选项栏：选区的四种组合方式（重新选择，添加到选区，从选取减去，与选区交叉</p><p>羽化：单位是像素，使边缘柔和</p><p>菜单栏-选择-修改-羽化</p><p>选中椭圆选框工具，默认勾选消除锯齿</p><h3 id="套索工具组和魔法工具"><a href="#套索工具组和魔法工具" class="headerlink" title="套索工具组和魔法工具"></a>套索工具组和魔法工具</h3><p>套索工具：点击鼠标左键拖动，闭合后松开</p><p>Ctrl+Shift+J 剪切选区</p><p>魔棒工具：将颜色相近的区域选出来</p><p>钢笔工具</p><h3 id="选区变形"><a href="#选区变形" class="headerlink" title="选区变形"></a>选区变形</h3><p>右键变换选区</p><h2 id="历史工具"><a href="#历史工具" class="headerlink" title="历史工具"></a>历史工具</h2><p>菜单栏-窗口-历史记录</p><p>菜单栏-编辑-后退一步</p><p>创建历史文档</p><p>新建快照</p><p>工具栏&#x3D;历史记录画笔工具</p><h2 id="画笔工具"><a href="#画笔工具" class="headerlink" title="画笔工具"></a>画笔工具</h2><p>快捷键B</p><p>按住shift键可画出直线，alt键拾取颜色</p><p>改变画笔大小：shift+[ ],alt+右键水平移动</p>]]></content>
-    
-    
-    <categories>
-      
-      <category>设计</category>
       
     </categories>
     
