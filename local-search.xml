@@ -4,16 +4,18 @@
   
   
   <entry>
-    <title>NEMU PA1</title>
-    <link href="/2024/08/27/NEMU-PA1/"/>
-    <url>/2024/08/27/NEMU-PA1/</url>
+    <title>php反序列化漏洞</title>
+    <link href="/2024/09/11/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/"/>
+    <url>/2024/09/11/php%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E/</url>
     
-    <content type="html"><![CDATA[<h1 id="阶段1"><a href="#阶段1" class="headerlink" title="阶段1"></a>阶段1</h1><h3 id="思考题1"><a href="#思考题1" class="headerlink" title="思考题1"></a>思考题1</h3><p>opcode_table是一个函数指针数组</p><p>定义在nemu&#x2F;src&#x2F;cpu&#x2F;exec&#x2F;exec.c文件</p><p>![p](D:\personal\blog\source_posts\NEMU-PA1\屏幕截图 2024-08-27 120928.png)</p><p>opcode_table数组为helper_fun类型，在同一文件看到了helper_fun的定义为：</p><p>![p](D:\personal\blog\source_posts\NEMU-PA1\屏幕截图 2024-08-27 121017.png)</p><p>typedef 返回类型 （*新类型)(参数表)，此处typedef的功能是定义新的helper_fun类型，并定义这种类型为指向某种函数的指针，这种函数有一个swaddr_t参数并返回int类型。</p><h3 id="思考题2"><a href="#思考题2" class="headerlink" title="思考题2"></a>思考题2</h3><p>cpu_exec()在nemu&#x2F;src&#x2F;monitor&#x2F;cpu-exec.c中</p><p>![p](D:\personal\blog\source_posts\NEMU-PA1\屏幕截图 2024-08-27 193928.png)</p><p>n的类型是无符号整数，-1是最大的数，所以for循环可以执行最大次数的循环，可以执行完指令。</p><h2 id="必做任务1-实现正确的寄存器结构体"><a href="#必做任务1-实现正确的寄存器结构体" class="headerlink" title="必做任务1- 实现正确的寄存器结构体"></a>必做任务1- 实现正确的寄存器结构体</h2><p>结构体和联合体</p><ul><li>结构体各自拥有自己的内存，同时存在，遵循内存对齐原则。一个struct变量的总长度等于所有成员长度之和</li><li>联合体各成员共用一块内存空间，同时只用一个成员可以得到内存的使用权，各变量共用一个内存首地址。union的总长度至少能容纳最大的成员变量，并且是所有成员变量大小的整数倍</li></ul><p>寄存器eax,ax,ah,al 具有内存共用的关系，应该设计成联合体而不是结构体。</p><p>而不同的32位寄存器之间是独立的，应该设计成结构体。</p><p>![p](D:\personal\blog\source_posts\NEMU-PA1\屏幕截图 2024-08-27 235704.png)</p><hr><p>解析命令</p><p>[readline库](<a href="https://blog.csdn.net/xuancbm/article/details/81436681">readline库的简单使用_libreadline c语言接口-CSDN博客</a>)</p><p><a href="%5B%E7%94%A8%E4%BA%BA%E8%AF%9D%E8%AE%B2%E6%87%82strtok%E5%87%BD%E6%95%B0%E7%9A%84%E7%90%86%E8%A7%A3%E5%92%8C%E4%BD%BF%E7%94%A8-CSDN%E5%8D%9A%E5%AE%A2%5D(https://blog.csdn.net/2302_80198073/article/details/135729196)">strtok函数</a></p><h2 id="必做任务2：实现单步执行，打印寄存器，扫描内存"><a href="#必做任务2：实现单步执行，打印寄存器，扫描内存" class="headerlink" title="必做任务2：实现单步执行，打印寄存器，扫描内存"></a>必做任务2：实现单步执行，打印寄存器，扫描内存</h2><h3 id="单步执行"><a href="#单步执行" class="headerlink" title="单步执行"></a>单步执行</h3><p>源代码中c,q,help 命令已经实现</p><p>cmd_c函数定义在 nemu&#x2F;src&#x2F;monitor&#x2F;debug&#x2F;ui.c 中</p><p>参考它的函数，我只需要把-1改成si 后面的参数</p><p>![p](D:\personal\blog\source_posts\NEMU-PA1\屏幕截图 2024-08-28 111001.png)</p><p>再把si命令加入结构体中就好了</p><p>若args为NULL,默认i&#x3D;1； 若i&lt;-1,提示错误； 若i&gt;&#x3D;-1,当i&gt;10时没能输出结果，需要修改nemu&#x2F;src&#x2F;monitor&#x2F;cpu-exec.c文件中的<code>#define MAX_INSTR_TO_PRINT 10</code>中的10改为最大值。</p><h3 id="打印寄存器"><a href="#打印寄存器" class="headerlink" title="打印寄存器"></a>打印寄存器</h3><p>我们在nemu&#x2F;include&#x2F;cpu&#x2F;reg.h中实现了寄存器的结构，寄存器包括8个32位通用寄存器和eip寄存器，还有很多标志寄存器</p><p>![p](D:\personal\blog\source_posts\NEMU-PA1\屏幕截图 2024-08-28 112214.png)</p><p>我可以用枚举数组打印寄存器的值，每一个数组成员都有一个默认值，从零开始依次加1，所以最后一个成员值加一就是数组长度</p><p>![p](D:\personal\blog\source_posts\NEMU-PA1\屏幕截图 2024-08-28 112237.png)</p><p>利用这些定义宏可以求寄存器的值</p><p>![p](D:\personal\blog\source_posts\NEMU-PA1\屏幕截图 2024-08-28 115536.png)</p><p>小插曲：之前我用 for(int i&#x3D;&amp;,i&lt;&amp;,i++)语法时报错：</p><p>![p](D:\personal\blog\source_posts\NEMU-PA1\屏幕截图 2024-08-28 114729.png)</p><p>循环初始声明只允许在C99模式下。</p><p>print(“0x%8x”) 表示输出一个16进制数，数字为8位，不足8位用0补齐</p><h3 id="扫描内存"><a href="#扫描内存" class="headerlink" title="扫描内存"></a>扫描内存</h3><p>命令格式为： x  个数n   起始地址</p><p>就是将从起始地址处接下来的n个地址的值打印出来</p><p>调用访存函数swaddr_read()(位于nemu&#x2F;src&#x2F;memory&#x2F;memory.c中)</p><h1 id="阶段2"><a href="#阶段2" class="headerlink" title="阶段2"></a>阶段2</h1><h2 id="必做任务3：表达式求值之词法分析"><a href="#必做任务3：表达式求值之词法分析" class="headerlink" title="必做任务3：表达式求值之词法分析"></a>必做任务3：表达式求值之词法分析</h2><p>nemu&#x2F;src&#x2F;monitor&#x2F;debug&#x2F;expr.c</p><p>要学正则表达式</p><p>在make_token()函数中将对应规则的字符串加入数组</p><h2 id="必做任务4：递归求值"><a href="#必做任务4：递归求值" class="headerlink" title="必做任务4：递归求值"></a>必做任务4：递归求值</h2><p>完全不会，写了两个函数（抄的），就成功了。我好没用啊</p><h2 id="必做任务5：实现更复杂的表达式求值"><a href="#必做任务5：实现更复杂的表达式求值" class="headerlink" title="必做任务5：实现更复杂的表达式求值"></a>必做任务5：实现更复杂的表达式求值</h2><p>没看懂是要干什么，好像上一步已经做了。</p><h3 id="选做任务1：负数表达式求值"><a href="#选做任务1：负数表达式求值" class="headerlink" title="选做任务1：负数表达式求值"></a>选做任务1：负数表达式求值</h3><p>就是区分减号和负号</p><h3 id="选做任务2：指针解引用"><a href="#选做任务2：指针解引用" class="headerlink" title="选做任务2：指针解引用"></a>选做任务2：指针解引用</h3><p>就是区分乘号和指针</p><hr><h1 id="阶段3"><a href="#阶段3" class="headerlink" title="阶段3"></a>阶段3</h1><h2 id="必做任务6：实现监视点的管理"><a href="#必做任务6：实现监视点的管理" class="headerlink" title="必做任务6：实现监视点的管理"></a>必做任务6：实现监视点的管理</h2><p>怎么还要学链表，指针看不懂，哭了</p><p>监视点可以在程序运行时监视某一变量的值合适发生变化，发生变化时程序暂停并打印变量的值</p><p>坚强</p><p>用虚拟机写代码太麻烦了，改用vscode,也不说什么练习vim了，还是接受吧。</p><p>咦，虚拟机ip怎么每天都在变</p><h2 id="必做任务7：实现监视点"><a href="#必做任务7：实现监视点" class="headerlink" title="必做任务7：实现监视点"></a>必做任务7：实现监视点</h2>]]></content>
+    <content type="html"><![CDATA[<h2 id="1-php面向对象"><a href="#1-php面向对象" class="headerlink" title="1. php面向对象"></a>1. php面向对象</h2><p>对象是类的实例，构成是成员变量和成员函数。</p><p>$this是在类里面调用当前类</p><p>实例化类用new关键字</p><p>新定义的对象直接给变量赋值，对象不能直接用echo和print输出，可以用var_dump和print_r,对象里不会呈现成员方法</p><p>类的修饰符包括public,protected,private</p><h2 id="2-序列化基本知识"><a href="#2-序列化基本知识" class="headerlink" title="2. 序列化基本知识"></a>2. 序列化基本知识</h2><p>序列化是将对象的属性转化为可以存储和运输的形式</p><p>类型：名称长度：名字：成员数量：{属性类型：长度：值；}</p><p>只序列化成员变量，私有属性在属性前加上%00类名%00，protected受保护属性序列化时，在变量名前加%00*%00</p><p>url编码 urlencode()</p><p>序列化 serialize()</p><h2 id="3-反序列化基本知识"><a href="#3-反序列化基本知识" class="headerlink" title="3. 反序列化基本知识"></a>3. 反序列化基本知识</h2><p>反序列化之后的内容为1个对象，对象的值由反序列化里的值提供，反序列化不触发类的成员方法，需要调用方法</p><p>记得修改变量时修改字符串长度</p><p>url解码 urldecode()</p><p>反序列化 unserialize()</p><h2 id="4-魔术方法"><a href="#4-魔术方法" class="headerlink" title="4. 魔术方法"></a>4. 魔术方法</h2><p>在特定情况下自动触发的行为方法</p><p>漏洞成因：unserialize()接收的值可控</p><p>实例化对象时触发构造函数__construct()</p><p>对象所有的引用被删除或对象被显式销毁时执行__destruct(),在反序列化之后会执行</p><p>在序列化之前会触发__sleep(),可用于清理对象，并返回一个包含对象中所有应被序列化的变量名称的数组</p><p>在反序列化之前触发__wakeup()</p><p>把对象当成字符串调用触发__toString()</p><p>调用对象可以使用print_r或var_dump,如果使用echo或print只能调用字符串的方法去调用对象，会触发toString()</p><p>把对象当成函数调用触发__invoke()</p><p>调用一个不存在的方法时触发__call($arg1,$arg2)</p><p>调用不存在的成员属性时触发__get($arg1)</p><p>给不存在的成员属性赋值__set($arg1,$arg2)</p><p>对不可访问属性使用isset()或empty()时，__isset()会被调用</p><p>__unset()差不多</p>]]></content>
     
     
     <categories>
       
-      <category>计算机</category>
+      <category>网络安全</category>
+      
+      <category>web</category>
       
     </categories>
     
@@ -46,7 +48,7 @@
     <link href="/2024/08/18/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
     <url>/2024/08/18/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</url>
     
-    <content type="html"><![CDATA[<h1 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h1><h2 id="1-1什么是操作系统"><a href="#1-1什么是操作系统" class="headerlink" title="1.1什么是操作系统"></a>1.1什么是操作系统</h2><p><img src="/" alt="p">![屏幕截图 2024-08-18 174705](D:\personal\blog\source_posts\操作系统\屏幕截图 2024-08-18 174705.png)</p><p>只有硬件的计算机叫做裸机，操作系统是计算机硬件和应用之间的一层软件</p><p>管理硬件：</p><p>CPU管理，内存管理，终端管理，磁盘管理，文件管理，网络管理，电源管理，多核管理</p><h2 id="1-2-揭开钢琴的盖子"><a href="#1-2-揭开钢琴的盖子" class="headerlink" title="1.2 揭开钢琴的盖子"></a>1.2 揭开钢琴的盖子</h2><p>打开电源-&gt;计算机开始工作</p><p>计算机怎么工作？一个计算模型</p><p>图灵机-&gt;通用图灵机-&gt;计算机</p><p>冯·诺伊曼的存储程序思想：将数据和程序存放到计算机内部的存储器中，计算机在程序的控制下一步步处理</p><p>打开电源，计算机执行的第一条指令</p><p>IP指向由硬件设计者决定</p><ol><li>x86PC刚开机时CPU处于实模式</li><li>开机时CS &#x3D;0xffff;IP&#x3D;0x0000</li><li>寻址0xffff0(ROM BIOS映射区)</li><li>检查RAM，键盘，显示器，软硬磁盘</li><li>将磁盘0磁道0扇区(引导扇区)读入0x7c00处</li><li>设置cs&#x3D;0x07c0,ip&#x3D;0x0000</li></ol><p>0x7c00处存放的代码就是从磁盘引导扇区读入的512个字节，引导扇区就是启动设备的第一个扇区 （开机时按住del键可进入启动设备设置界面，可设置为光盘启动），启动设备信息被设置在CMOS中，因此，硬盘的第一个扇区存放着开机后执行的第一段我们可以控制的程序</p><p>![p](D:\personal\blog\source_posts\操作系统\屏幕截图 2024-08-18 190607.png)</p><p>![p](D:\personal\blog\source_posts\操作系统\屏幕截图 2024-08-18 191219.png)</p><p>![p](D:\personal\blog\source_posts\操作系统\屏幕截图 2024-08-18 191605.png)</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="操作系统"><a href="#操作系统" class="headerlink" title="操作系统"></a>操作系统</h1><h2 id="1-1什么是操作系统-屏幕截图-2024-08-18-174705-D-personal-blog-source-posts-操作系统-屏幕截图-2024-08-18-174705-png"><a href="#1-1什么是操作系统-屏幕截图-2024-08-18-174705-D-personal-blog-source-posts-操作系统-屏幕截图-2024-08-18-174705-png" class="headerlink" title="1.1什么是操作系统![屏幕截图 2024-08-18 174705](D:\personal\blog\source_posts\操作系统\屏幕截图 2024-08-18 174705.png)"></a>1.1什么是操作系统![屏幕截图 2024-08-18 174705](D:\personal\blog\source_posts\操作系统\屏幕截图 2024-08-18 174705.png)</h2><p>只有硬件的计算机叫做裸机，操作系统是计算机硬件和应用之间的一层软件</p><p>管理硬件：</p><p>CPU管理，内存管理，终端管理，磁盘管理，文件管理，网络管理，电源管理，多核管理</p><h2 id="1-2-揭开钢琴的盖子"><a href="#1-2-揭开钢琴的盖子" class="headerlink" title="1.2 揭开钢琴的盖子"></a>1.2 揭开钢琴的盖子</h2><p>打开电源-&gt;计算机开始工作</p><p>计算机怎么工作？一个计算模型</p><p>图灵机-&gt;通用图灵机-&gt;计算机</p><p>冯·诺伊曼的存储程序思想：将数据和程序存放到计算机内部的存储器中，计算机在程序的控制下一步步处理</p><p>打开电源，计算机执行的第一条指令</p><p>IP指向由硬件设计者决定</p><ol><li>x86PC刚开机时CPU处于实模式</li><li>开机时CS &#x3D;0xffff;IP&#x3D;0x0000</li><li>寻址0xffff0(ROM BIOS映射区)</li><li>检查RAM，键盘，显示器，软硬磁盘</li><li>将磁盘0磁道0扇区(引导扇区)读入0x7c00处</li><li>设置cs&#x3D;0x07c0,ip&#x3D;0x0000</li></ol><p>0x7c00处存放的代码就是从磁盘引导扇区读入的512个字节，引导扇区就是启动设备的第一个扇区 （开机时按住del键可进入启动设备设置界面，可设置为光盘启动），启动设备信息被设置在CMOS中，因此，硬盘的第一个扇区存放着开机后执行的第一段我们可以控制的程序</p><p>![p](D:\personal\blog\source_posts\操作系统\屏幕截图 2024-08-18 190607.png)</p><p>![p](D:\personal\blog\source_posts\操作系统\屏幕截图 2024-08-18 191219.png)</p><p>![p](D:\personal\blog\source_posts\操作系统\屏幕截图 2024-08-18 191605.png)</p>]]></content>
     
     
     <categories>
@@ -158,49 +160,11 @@
   
   
   <entry>
-    <title>python爬虫</title>
-    <link href="/2024/07/11/python%E7%88%AC%E8%99%AB/"/>
-    <url>/2024/07/11/python%E7%88%AC%E8%99%AB/</url>
-    
-    <content type="html"><![CDATA[<h1 id="Python爬虫"><a href="#Python爬虫" class="headerlink" title="Python爬虫"></a>Python爬虫</h1><p><a href="%5B%E3%80%9001-%E7%90%86%E8%AE%BA%E8%AF%BE%E3%80%91%E5%BF%AB%E9%80%9F%E6%98%93%E6%87%82Python%E5%85%A5%E9%97%A8_%E5%93%94%E5%93%A9%E5%93%94%E5%93%A9_bilibili%5D(https://www.bilibili.com/video/BV1d54y1g7db?p=2&vd_source=9d0185d0a50c7871b2d2a934cc62a5fd)">视频链接</a></p><p>[python教程](<a href="https://www.runoob.com/python/python-tutorial.html">Python 基础教程 | 菜鸟教程 (runoob.com)</a>)</p><p>安装pycharm</p><h2 id="常用语法"><a href="#常用语法" class="headerlink" title="常用语法"></a>常用语法</h2><ul><li>打印字符串 print(“”) 字符串里面有字符串时，单包双或反斜杠转义,三引号保留格式</li><li>字符串连接 print(“你好”+” 这是一句代码”)</li><li>变量取名：字母，数字，下划线</li><li>注释：单行注释#+空格 Ctrl+&#x2F; 整块注释  Ctrl+Shift+&#x2F; 取消注释</li><li>数据类型</li><li>对象，属性，方法</li><li></li></ul>]]></content>
-    
-    
-    <categories>
-      
-      <category>计算机</category>
-      
-    </categories>
-    
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>科研工具</title>
-    <link href="/2024/07/11/%E7%A7%91%E7%A0%94%E5%B7%A5%E5%85%B7/"/>
-    <url>/2024/07/11/%E7%A7%91%E7%A0%94%E5%B7%A5%E5%85%B7/</url>
-    
-    <content type="html"><![CDATA[<h1 id="科研网站"><a href="#科研网站" class="headerlink" title="科研网站"></a>科研网站</h1><ul><li>[中国科技论文在线](<a href="https://www.paper.edu.cn/?from=zk_oaindex">中国科技论文在线-科技论文，开放存取 (paper.edu.cn)</a>)</li><li>[全国图书馆参考咨询联盟](<a href="http://www.ucdrs.superlib.net/">全国图书馆参考咨询联盟 (superlib.net)</a>)</li><li>[国家数字图书馆](<a href="https://www.nlc.cn/web/index.shtml">中国国家图书馆 · 中国国家数字图书馆 · 国家典籍博物馆 (nlc.cn)</a>)</li></ul><p>施工中</p>]]></content>
-    
-    
-    <categories>
-      
-      <category>科研</category>
-      
-    </categories>
-    
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>CS学习资源</title>
     <link href="/2024/07/10/CS%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90/"/>
     <url>/2024/07/10/CS%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%BA%90/</url>
     
-    <content type="html"><![CDATA[<h1 id="CS学习资源"><a href="#CS学习资源" class="headerlink" title="CS学习资源"></a>CS学习资源</h1><h2 id="认识大学的计算机教育"><a href="#认识大学的计算机教育" class="headerlink" title="认识大学的计算机教育"></a>认识大学的计算机教育</h2><p>我刚刚结束了大一的计算机学习，但是，我并没有想象中获得很多的知识，我的代码能力很差，对计算机系统的理解也只浮于表面，就连花大部分时间学习的高数都没有学好。我有一种担忧，我毕业后没有获得让我找到工作的本领。我希望自己能学一些真本事，哪怕成绩不足以让我保研，我也有一技之长，凭自己本事考研。但现在，我确实对大学祛魅了。我看了很多博客，在讲怎么自学计算机，国内的计算机教育如何落后，就我个人在大学的学习而言，课堂上确实学不会东西。以下是我认为有用的博客：</p><ul><li>[认识大学现状](<a href="https://www.yuque.com/0xffff.one/cs-learning/current-situation">认识大学现状 (yuque.com)</a>)</li><li>[学习计算机这一路上的经验之谈](<a href="https://interviewguide.cn/notes/04-experience/01-learn_experience/01-introduce.html">学习计算机这一路上的经验之谈 | 阿秀的学习笔记 (interviewguide.cn)</a>)</li><li>[CS自学指南](<a href="https://csdiy.wiki/">CS自学指南 (csdiy.wiki)</a>)</li><li>[上海交通大学生存手册](<a href="https://github.com/SurviveSJTU/SurviveSJTUManual">fix typoes from previous PR · SurviveSJTU&#x2F;SurviveSJTUManual@d0946e3 (github.com)</a>)</li><li>[给中国新大学生的网上冲浪和计算机使用教程](<a href="https://github.com/mzdluo123/SurfingTutorial">mzdluo123&#x2F;SurfingTutorial: 给中国新大学生的网上冲浪和计算机使用教程 (github.com)</a>)</li></ul><h2 id="计算机学习交流网站"><a href="#计算机学习交流网站" class="headerlink" title="计算机学习交流网站"></a>计算机学习交流网站</h2><ul><li>稀土掘金 一个汇集了各种技术专栏的内容平台</li><li>InfoQ 一个实践驱动，以社区为中心的技术媒体平台</li><li>OSCHINA 中文开源技术交流平台</li><li>博客园 计算机大佬的博客</li><li>思否 中国专业的开发者技术社区</li><li>DEV Community 国外开发者社区</li><li>stack overflow  计算机有难题可以到这里找答案</li><li>Dzone 技术涵盖比较全面的网站</li><li>MDN WebDocs 面向web开发者的文档</li><li>HackerRank 专为程序员提供各种编程挑战和技能测试</li></ul><h2 id="计算机教程"><a href="#计算机教程" class="headerlink" title="计算机教程"></a>计算机教程</h2><ul><li>菜鸟教程</li><li>tutorialspoint(外国版菜鸟教程)</li><li>w3cschool</li><li>Linux公社</li></ul><h2 id="可以参加的的竞赛"><a href="#可以参加的的竞赛" class="headerlink" title="可以参加的的竞赛"></a>可以参加的的竞赛</h2><p>全国大学生计算机系统能力大赛</p><p>中国大学生计算机设计大赛</p><p>全国大学生信息安全竞赛</p><p>acm算法竞赛</p><p>蓝桥杯</p>]]></content>
+    <content type="html"><![CDATA[<h1 id="CS学习资源"><a href="#CS学习资源" class="headerlink" title="CS学习资源"></a>CS学习资源</h1><h2 id="认识大学的计算机教育"><a href="#认识大学的计算机教育" class="headerlink" title="认识大学的计算机教育"></a>认识大学的计算机教育</h2><ul><li>[认识大学现状](<a href="https://www.yuque.com/0xffff.one/cs-learning/current-situation">认识大学现状 (yuque.com)</a>)</li><li>[学习计算机这一路上的经验之谈](<a href="https://interviewguide.cn/notes/04-experience/01-learn_experience/01-introduce.html">学习计算机这一路上的经验之谈 | 阿秀的学习笔记 (interviewguide.cn)</a>)</li><li>[CS自学指南](<a href="https://csdiy.wiki/">CS自学指南 (csdiy.wiki)</a>)</li><li>[上海交通大学生存手册](<a href="https://github.com/SurviveSJTU/SurviveSJTUManual">fix typoes from previous PR · SurviveSJTU&#x2F;SurviveSJTUManual@d0946e3 (github.com)</a>)</li><li>[给中国新大学生的网上冲浪和计算机使用教程](<a href="https://github.com/mzdluo123/SurfingTutorial">mzdluo123&#x2F;SurfingTutorial: 给中国新大学生的网上冲浪和计算机使用教程 (github.com)</a>)</li></ul><h2 id="计算机学习交流网站"><a href="#计算机学习交流网站" class="headerlink" title="计算机学习交流网站"></a>计算机学习交流网站</h2><ul><li>稀土掘金 一个汇集了各种技术专栏的内容平台</li><li>InfoQ 一个实践驱动，以社区为中心的技术媒体平台</li><li>OSCHINA 中文开源技术交流平台</li><li>博客园 计算机大佬的博客</li><li>思否 中国专业的开发者技术社区</li><li>DEV Community 国外开发者社区</li><li>stack overflow  计算机有难题可以到这里找答案</li><li>Dzone 技术涵盖比较全面的网站</li><li>MDN WebDocs 面向web开发者的文档</li><li>HackerRank 专为程序员提供各种编程挑战和技能测试</li></ul><h2 id="计算机教程"><a href="#计算机教程" class="headerlink" title="计算机教程"></a>计算机教程</h2><ul><li>菜鸟教程</li><li>tutorialspoint(外国版菜鸟教程)</li><li>w3cschool</li><li>Linux公社</li></ul><h2 id="可以参加的的竞赛"><a href="#可以参加的的竞赛" class="headerlink" title="可以参加的的竞赛"></a>可以参加的的竞赛</h2><p>全国大学生计算机系统能力大赛</p><p>中国大学生计算机设计大赛</p><p>全国大学生信息安全竞赛</p><p>acm算法竞赛</p><p>蓝桥杯</p>]]></content>
     
     
     <categories>
@@ -224,7 +188,7 @@
     
     <categories>
       
-      <category>软件使用教程</category>
+      <category>设计</category>
       
     </categories>
     
