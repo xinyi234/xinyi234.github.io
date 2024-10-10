@@ -16,21 +16,21 @@
   <meta name="author" content="xinyi234">
   <meta name="keywords" content="">
   
-    <meta name="description" content="javascript简介js是一种运行在客户端的编程语言，实现人机交互效果 网页特效，表单验证，数据交互 服务端编程(node.js) Javascript 可以分为ECMAScript和web api(dom和bom) javascript书写位置 内部javascript 写在的上方  外部javascript 代码写在.js结尾的文件里，通过script标签引入  内联javascript">
+    <meta name="description" content="简介产生条件：js符合非阻塞IO模型，Chrome的V8引擎开源 Node.js是一个基于Chrome V8引擎的js运行环境，C++开发 使js可以运行在前后端 在终端运行node进入交互环境 node 文件名.js 运行文件 npm包管理器 全局对象Node.js提高了很多全局对象，不需要引入第三方资源 console.log() 打印 setTimeout() 延时执行 setInterva">
 <meta property="og:type" content="article">
-<meta property="og:title" content="javascript">
-<meta property="og:url" content="https://xinyi234.github.io/2024/10/05/javascript/index.html">
+<meta property="og:title" content="Nodejs">
+<meta property="og:url" content="https://xinyi234.github.io/2024/10/10/Nodejs/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="javascript简介js是一种运行在客户端的编程语言，实现人机交互效果 网页特效，表单验证，数据交互 服务端编程(node.js) Javascript 可以分为ECMAScript和web api(dom和bom) javascript书写位置 内部javascript 写在的上方  外部javascript 代码写在.js结尾的文件里，通过script标签引入  内联javascript">
+<meta property="og:description" content="简介产生条件：js符合非阻塞IO模型，Chrome的V8引擎开源 Node.js是一个基于Chrome V8引擎的js运行环境，C++开发 使js可以运行在前后端 在终端运行node进入交互环境 node 文件名.js 运行文件 npm包管理器 全局对象Node.js提高了很多全局对象，不需要引入第三方资源 console.log() 打印 setTimeout() 延时执行 setInterva">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-10-05T02:17:03.000Z">
-<meta property="article:modified_time" content="2024-10-08T13:38:51.217Z">
+<meta property="article:published_time" content="2024-10-10T14:27:01.000Z">
+<meta property="article:modified_time" content="2024-10-10T16:06:06.024Z">
 <meta property="article:author" content="xinyi234">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>javascript - Hexo</title>
+  <title>Nodejs - Hexo</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -196,7 +196,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="javascript"></span>
+            <span id="subtitle" data-typed-text="Nodejs"></span>
           
         </div>
 
@@ -207,8 +207,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-10-05 10:17" pubdate>
-          2024年10月5日 上午
+        <time datetime="2024-10-10 22:27" pubdate>
+          2024年10月10日 晚上
         </time>
       </span>
     
@@ -219,7 +219,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          610 字
+          168 字
         
       </span>
     
@@ -230,7 +230,7 @@
         
         
         
-          6 分钟
+          2 分钟
         
       </span>
     
@@ -267,77 +267,26 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">javascript</h1>
+            <h1 id="seo-header">Nodejs</h1>
             
             
               <div class="markdown-body">
                 
-                <h2 id="javascript简介"><a href="#javascript简介" class="headerlink" title="javascript简介"></a>javascript简介</h2><p>js是一种运行在客户端的编程语言，实现人机交互效果</p>
-<p>网页特效，表单验证，数据交互</p>
-<p>服务端编程(node.js)</p>
-<p>Javascript 可以分为ECMAScript和web api(dom和bom)</p>
-<h2 id="javascript书写位置"><a href="#javascript书写位置" class="headerlink" title="javascript书写位置"></a>javascript书写位置</h2><ol>
-<li><p>内部javascript</p>
-<p>写在</body>的上方</p>
-</li>
-<li><p>外部javascript</p>
-<p>代码写在.js结尾的文件里，通过script标签引入</p>
-</li>
-<li><p>内联javascript</p>
-<p>代码写在标签内部</p>
-</li>
-</ol>
-<h2 id="注释和结束符"><a href="#注释和结束符" class="headerlink" title="注释和结束符"></a>注释和结束符</h2><ul>
-<li><p>单行注释</p>
-<p>&#x2F;&#x2F;右边这一行的代码会被忽略 ctrl+&#x2F;</p>
-</li>
-<li><p>块注释</p>
-<p>&#x2F;*多行注释 shift+alt_a *&#x2F;</p>
-</li>
-</ul>
-<p>结束符 ；要么都加要么都不加</p>
-<h2 id="输入输出语法"><a href="#输入输出语法" class="headerlink" title="输入输出语法"></a>输入输出语法</h2><p>输出语法</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs stylus">document<span class="hljs-selector-class">.write</span>(<span class="hljs-string">&quot;内容&quot;</span>)<br><span class="hljs-function"><span class="hljs-title">alert</span><span class="hljs-params">(<span class="hljs-string">&#x27;弹窗&#x27;</span>)</span></span><br>console<span class="hljs-selector-class">.log</span>(<span class="hljs-string">&#x27;控制台打印&#x27;</span>)<br></code></pre></td></tr></table></figure>
+                <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>产生条件：js符合非阻塞IO模型，Chrome的V8引擎开源</p>
+<p>Node.js是一个基于Chrome V8引擎的js运行环境，C++开发</p>
+<p>使js可以运行在前后端</p>
+<p>在终端运行node进入交互环境</p>
+<p>node 文件名.js 运行文件</p>
+<p>npm包管理器</p>
+<h2 id="全局对象"><a href="#全局对象" class="headerlink" title="全局对象"></a>全局对象</h2><p>Node.js提高了很多全局对象，不需要引入第三方资源</p>
+<p>console.log() 打印</p>
+<p>setTimeout() 延时执行</p>
+<p>setInterval() 间隔执行</p>
+<h2 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h2><p>在一个函数里调用另一个函数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">sayHi</span>(<span class="hljs-params"></span>)&#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Hi&quot;</span>)<br>&#125;<br><span class="hljs-keyword">function</span> <span class="hljs-title function_">sayBye</span>(<span class="hljs-params">name</span>)&#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(name +<span class="hljs-string">&quot;, Bye&quot;</span>)<br>&#125;<br><span class="hljs-keyword">function</span> <span class="hljs-title function_">callfunction</span>(<span class="hljs-params">callback,name</span>)&#123;<br>    <span class="hljs-title function_">callback</span>(name)<br>&#125;<br><br><span class="hljs-title function_">callfunction</span>(sayBye,<span class="hljs-string">&quot;jonh&quot;</span>)<br><span class="hljs-title function_">callfunction</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">name</span>)&#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;hello, &quot;</span>+name)<br>&#125;,<span class="hljs-string">&quot;Alice&quot;</span>)<br></code></pre></td></tr></table></figure>
 
-<p>输入语法</p>
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs stylus"><span class="hljs-function"><span class="hljs-title">prompt</span><span class="hljs-params">(<span class="hljs-string">&#x27;请输入：&#x27;</span>)</span></span><br></code></pre></td></tr></table></figure>
 
-<p>js代码执行顺序：按html文档流顺序执行js代码，alert()和prompt()会跳过页面渲染先被执行</p>
-<p>字面量：计算机描述的事物</p>
-<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><p>变量是计算机存储数据的容器，不是数据本身</p>
-<p>声明变量：let 变量名</p>
-<p>同一变量只能声明一次</p>
-<p>初始化：let 变量名&#x3D;值</p>
-<p>更新变量：重新赋值会覆盖</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">let</span> age = <span class="hljs-number">18</span><br>age = <span class="hljs-number">19</span><br></code></pre></td></tr></table></figure>
 
-<p>声明多个变量：let 变量1&#x3D;值1，变量2&#x3D;值2 (不推荐)</p>
-<p>变量本质是程序在内存中申请的用来存放数据的小空间</p>
-<p>变量命名规则：</p>
-<ul>
-<li>不能用关键字</li>
-<li>只能用下划线、字母、数字、$组成，数字不能开头</li>
-<li>字母区分大小写</li>
-</ul>
-<p>let和var的区别：</p>
-<ul>
-<li>可以先使用再声明</li>
-<li>var声明的变量可以重复声明</li>
-<li>变量提升，全局变量，没有块级作用域</li>
-</ul>
-<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><p>将一组数据存储在单个变量名下</p>
-<p>声明：let 数组名 &#x3D; [数据1，数据2，…,数组n]</p>
-<h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><p>多个字符串用+连接，要用引号括起来</p>
-<p>模板字符串： ${变量名} 用反引号包裹</p>
-<p>检测数据类型：typeof</p>
-<h2 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h2><p>使用表单、prompt获取的数据默认是字符串类型，不能进行算数运算</p>
-<ul>
-<li><p>隐式转换： 加号两边只要有一个字符串，都会把另一个转成字符串，任何数据和字符串相加结果都是字符串；除了+以外的算数运算符，都会把数据转成数字类型;前面加+转换为Number</p>
-</li>
-<li><p>显式转换：转换成数字 Number()  parseInt(数据) 只保留整数</p>
-<p>parseFloat(数据) 可以保留小数</p>
-</li>
-</ul>
 
                 
               </div>
@@ -376,8 +325,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>javascript</div>
-      <div>https://xinyi234.github.io/2024/10/05/javascript/</div>
+      <div>Nodejs</div>
+      <div>https://xinyi234.github.io/2024/10/10/Nodejs/</div>
     </div>
     <div class="license-meta">
       
@@ -389,7 +338,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年10月5日</div>
+          <div>2024年10月10日</div>
         </div>
       
       
@@ -421,18 +370,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2024/10/10/Nodejs/" title="Nodejs">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Nodejs</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2024/10/05/Vue/" title="Vue">
-                        <span class="hidden-mobile">Vue</span>
+                      <a href="/2024/10/05/javascript/" title="javascript">
+                        <span class="hidden-mobile">javascript</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
