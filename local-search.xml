@@ -4,6 +4,27 @@
   
   
   <entry>
+    <title>Linux处理目标文件的工具</title>
+    <link href="/2024/10/26/Linux%E5%A4%84%E7%90%86%E7%9B%AE%E6%A0%87%E6%96%87%E4%BB%B6%E7%9A%84%E5%B7%A5%E5%85%B7/"/>
+    <url>/2024/10/26/Linux%E5%A4%84%E7%90%86%E7%9B%AE%E6%A0%87%E6%96%87%E4%BB%B6%E7%9A%84%E5%B7%A5%E5%85%B7/</url>
+    
+    <content type="html"><![CDATA[<h1 id="GNU-Binutils"><a href="#GNU-Binutils" class="headerlink" title="GNU Binutils"></a>GNU Binutils</h1><p>GNU Binutils 是一套用于创建、管理和维护二进制目标文件的工具集合，包括addr2line, ar, gprof, nm, objdump, ranlib, size, strings, strip</p><h2 id="addr2line"><a href="#addr2line" class="headerlink" title="addr2line"></a>addr2line</h2><p>将可执行文件中代码地址转换为文件名和行号，可执行文件必须带调试信息</p><p>常用选项：</p><p>-a –addresses：在函数名、文件和行号信息前，显示地址，以十六进制形式。<br>-b –target&#x3D;<bfdname>：指定目标文件格式为bfdname。<br>-e –exe&#x3D;<executable>：指定需要转换地址的可执行文件名。<br>-i –inlines： 如果需要转换的地址是内联函数，则输出的信息包括其最近范围内的一个非内联函数的信息。<br>-j –section&#x3D;<name>：给出的地址代表指定section的偏移，而非绝对地址。<br>-p –pretty-print：使得函数输出信息更加人性化：每一个地址的信息占一行。<br>-s –basenames：仅仅显示每个文件名的基址（即不显示文件的具体路径，只显示文件名）。<br>-f –functions：在显示文件名、行号输出信息的同时显示函数名信息。<br>-C –demangle[&#x3D;style]：将低级别的符号名解码为用户级别的名字。<br>-h –help：输出帮助信息。<br>-v –version：输出版本号</p><h2 id="ar"><a href="#ar" class="headerlink" title="ar"></a>ar</h2><p>创建、修改静态库文件，从静态库中提取单个模块等</p><p>操作模式：</p><p>d：从库中删除模块。按模块原来的文件名指定要删除的模块。</p><p>m：在一个库中移动成员。当库中如果有若干模块有相同的符号定义(如函数定义)，则成员的位置顺序很重要。如果没有指定任选项，任何指定的成员将移到库的最后。可以使用’a’，’b’，或’I’操作选项移动到指定的位置。<br>p：显示库中指定的成员到标准输出。如果指定任选项v，则在输出成员的内容前，将显示成员的名字。如果没有指定成员的名字，所有库中的文件将显示出来。<br>q：快速追加。增加新模块到库的结尾处，不会检查是否需要替换。<br>r：在库中插入模块(替换)。如果插入的模块名已经在库中存在，则替换同名的模块。如果若干模块中有一个模块在库中不存在，ar显示一个错误消息，不会替换 其它同名模块。<br>t：显示库的模块表清单。<br>x：从库中提取一个成员。如果不指定要提取的模块，则提取库中所有的模块。</p><p>操作选项：</p><p>a：在库的一个已经存在的成员后面增加一个新的文件。如果使用选项a，则应该为命令行中membername参数指定一个已经存在的成员名。<br>b：在库的一个已经存在的成员前面增加一个新的文件。如果使用选项b，则应该为命令行中membername参数指定一个已经存在的成员名。<br>c：创建一个静态库。不管库是否存在，都将创建。<br>f：在库中截短指定的名字。缺省情况下，文件名的长度是不受限制的，可以使用f参数将文件名截短，以保证与其它系统的兼容。<br>i：在库的一个已经存在的成员前面增加一个新的文件。如果使用选项i，则应该为命令行中membername参数指定一个已经存在的成员名。<br>N：与count参数一起使用，在库中有多个相同的文件名时指定提取或输出的个数。<br>o：当提取成员时，保留成员的原始数据。如果不指定o选项，则提取出的模块的时间将标为提取出的时间。<br>P：进行文件名匹配时使用全路径名。<br>s：写入一个目标文件索引到库中，或者更新一个存在的目标文件索引。<br>S：不创建目标文件索引，在创建较大的库时能加快时间。<br>u：插入列出文件中比库中同名文件新的文件，只用于r操作选项。<br>v：用来显示执行操作选项的附加信息。<br>V：显示ar的版本.</p><h2 id="gprof"><a href="#gprof" class="headerlink" title="gprof"></a>gprof</h2><p>性能分析工具，主要分析C&#x2F;C++程序在运行时的函数调用关系和时间消耗</p><p>主要参数：</p><p>-b: 制定基本块剖析的粒度</p><p>-F：只显示指定名称的函数</p><p>-p: 输出每个函数的调用栈</p><p>-s: 按时间消耗排序输出结果</p><p>命令使用：</p><ol><li>编译程序：使用gcc编译器并添加-pg, 生成可执行文件</li><li>运行程序 .&#x2F;test</li><li>生成剖析文件：运行结束后会生成名为gmon.out的文件</li><li>分析数据：使用gprof命令对gmon.out文件进行分析，生成性能分析报告 gprof .&#x2F;test gmon.out &gt;report.txt</li><li>查看报告</li></ol><h2 id="nm"><a href="#nm" class="headerlink" title="nm"></a>nm</h2><p>检查分析二进制文件、库文件、可执行文件中的符号表，返回二进制文件中的各段信息</p><p>常用参数：</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs text">-A 或-o或 --print-file-name：打印出每个符号属于的文件<br>-a或--debug-syms：打印出所有符号，包括debug符号<br>-B：BSD码显示<br>-C或--demangle[=style]：对低级符号名称进行解码，C++文件需要添加<br>--no-demangle：不对低级符号名称进行解码，默认参数<br>-D 或--dynamic：显示动态符号而不显示普通符号，一般用于动态库<br>-f format或--format=format：显示的形式，默认为bsd，可选为sysv和posix<br>-g或--extern-only：仅显示外部符号<br>-h或--help：国际惯例，显示命令的帮助信息<br>-n或-v或--numeric-sort：显示的符号以地址排序，而不是名称排序<br>-p或--no-sort：不对显示内容进行排序<br>-P或--portability：使用POSIX.2标准<br>-V或--version：国际管理，查看版本<br>--defined-only：仅显示定义的符号<br></code></pre></td></tr></table></figure><h2 id="ranlib"><a href="#ranlib" class="headerlink" title="ranlib"></a>ranlib</h2><p>为静态库文件生成索引</p><p>ranlib命令的参数包括：</p><ul><li><code>@&lt;file&gt;</code>：从指定文件中读取选项。</li><li><code>--plugin&lt;name&gt;</code>：加载指定的插件程序。</li><li><code>-D</code>：将0用于符号表时间戳（默认）。</li><li><code>-U</code>：使用实际符号表时间戳。</li><li><code>-t</code>：更新归档的符号映射时间戳记。</li><li><code>-h</code>、<code>--help</code>：打印帮助消息。</li><li><code>-v</code>、<code>--version</code>：打印版本信息。</li></ul><h2 id="size"><a href="#size" class="headerlink" title="size"></a>size</h2><p>显示目标文件或(.a)档案文件中所有section的大小</p><p>size [-A|-B|–format&#x3D;compatibility]<br>            [–help]<br>            [-d|-o|-x|–radix&#x3D;number]<br>            [–common]<br>            [-t|–totals]<br>            [–target&#x3D;bfdname] [-V|–version]<br>            [objfile…]<br>-A|-B|–format&#x3D;compatibility</p><h2 id="strings"><a href="#strings" class="headerlink" title="strings"></a>strings</h2><p>用于显示目标文件中的所有可打印字符串信息</p><p>-d: 只打印目标文件data分区中初始化字符串</p><h2 id="strip"><a href="#strip" class="headerlink" title="strip"></a>strip</h2><p> 从可执行文件中有选择地除去行号信息、重定位信息、调试段，减少可执行文件地大小</p><p>-s|–strip-all：删除所有符号信息</p><p>-S|-g|-d|–strip-debug：只删除调试符号信息</p><p>-K symbolname |–keep-symbol&#x3D;symbolname：保留符号</p><p>-N symbolname |–strip-symbol&#x3D;symbolname：移除符号</p><p>-o：输出文件</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>网络安全</category>
+      
+      <category>pwn</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>Linux进程命令</title>
     <link href="/2024/10/24/Linux%E8%BF%9B%E7%A8%8B%E5%91%BD%E4%BB%A4/"/>
     <url>/2024/10/24/Linux%E8%BF%9B%E7%A8%8B%E5%91%BD%E4%BB%A4/</url>
