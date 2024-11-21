@@ -4,27 +4,6 @@
   
   
   <entry>
-    <title>shell_lab</title>
-    <link href="/2024/10/28/shell-lab/"/>
-    <url>/2024/10/28/shell-lab/</url>
-    
-    <content type="html"><![CDATA[]]></content>
-    
-    
-    <categories>
-      
-      <category>计算机</category>
-      
-      <category>CSAPP</category>
-      
-    </categories>
-    
-    
-  </entry>
-  
-  
-  
-  <entry>
     <title>Linux处理目标文件的工具</title>
     <link href="/2024/10/26/Linux%E5%A4%84%E7%90%86%E7%9B%AE%E6%A0%87%E6%96%87%E4%BB%B6%E7%9A%84%E5%B7%A5%E5%85%B7/"/>
     <url>/2024/10/26/Linux%E5%A4%84%E7%90%86%E7%9B%AE%E6%A0%87%E6%96%87%E4%BB%B6%E7%9A%84%E5%B7%A5%E5%85%B7/</url>
@@ -203,25 +182,6 @@
       <category>网络安全</category>
       
       <category>web</category>
-      
-    </categories>
-    
-    
-  </entry>
-  
-  
-  
-  <entry>
-    <title>kali使用metasploit</title>
-    <link href="/2024/08/25/kali%E4%BD%BF%E7%94%A8metasploit/"/>
-    <url>/2024/08/25/kali%E4%BD%BF%E7%94%A8metasploit/</url>
-    
-    <content type="html"><![CDATA[<p>在kali中 metasploit主要使用PostgreSQL数据库存储数据，在使用时需要启动PostgreSQL数据库</p><p>打开Kali 并且在终端内输入以下命令 来激活metasploit 自带数据库postgresql 。如果你使用的不是root终端命令前必须添加“sudo”</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">sudo systemctl start postgresql<br></code></pre></td></tr></table></figure><p>第一次使用要初始化数据库</p><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs text">sudo msfdb init<br></code></pre></td></tr></table></figure><p>输入 msfconsole 进入控制中心</p>]]></content>
-    
-    
-    <categories>
-      
-      <category>网络安全</category>
       
     </categories>
     
