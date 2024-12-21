@@ -1,0 +1,190 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>异常控制流 | Xinyi's blog</title><meta name="author" content="xinyi"><meta name="copyright" content="xinyi"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="异常控制流是控制流的突变，不一定与程序的执行有关。跳转和分支、过程调用和返回不属于异常控制流 处理器异常硬件和操作系统相互配合实现  异常号-&gt;异常向量表-&gt;异常处理函数 异常返回：1.正在执行的指令 2.下一条指令 3.终止 异步异常：中断(I&#x2F;O设备) 同步异常：陷阱(系统调用、断点)，故障(缺页、保护、除零)，终止(非法指令、奇偶校验) 异常表由操作系统创建，常驻在内存">
+<meta property="og:type" content="article">
+<meta property="og:title" content="异常控制流">
+<meta property="og:url" content="https://xinyi234.github.io/2024/12/18/%E5%BC%82%E5%B8%B8%E6%8E%A7%E5%88%B6%E6%B5%81/index.html">
+<meta property="og:site_name" content="Xinyi&#39;s blog">
+<meta property="og:description" content="异常控制流是控制流的突变，不一定与程序的执行有关。跳转和分支、过程调用和返回不属于异常控制流 处理器异常硬件和操作系统相互配合实现  异常号-&gt;异常向量表-&gt;异常处理函数 异常返回：1.正在执行的指令 2.下一条指令 3.终止 异步异常：中断(I&#x2F;O设备) 同步异常：陷阱(系统调用、断点)，故障(缺页、保护、除零)，终止(非法指令、奇偶校验) 异常表由操作系统创建，常驻在内存">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://xinyi234.github.io/img/head.jpg">
+<meta property="article:published_time" content="2024-12-18T07:35:27.000Z">
+<meta property="article:modified_time" content="2024-12-21T04:13:28.180Z">
+<meta property="article:author" content="xinyi">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xinyi234.github.io/img/head.jpg"><link rel="shortcut icon" href="/img/head.jpg"><link rel="canonical" href="https://xinyi234.github.io/2024/12/18/%E5%BC%82%E5%B8%B8%E6%8E%A7%E5%88%B6%E6%B5%81/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'null',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '异常控制流',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  isShuoshuo: false
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/head.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas-fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></li></ul></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/head.jpg" alt="Logo"><span class="site-name">Xinyi's blog</span></a><a class="nav-page-title" href="/"><span class="site-name">异常控制流</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas-fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><span class="site-page group"><i class="fa-fw fas fa-list"></i><span> List</span><i class="fas fa-chevron-down"></i></span><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li><li><a class="site-page child" href="/movies/"><i class="fa-fw fas fa-video"></i><span> Movie</span></a></li><li><a class="site-page child" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></li><li><a class="site-page child" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></li></ul></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">异常控制流</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-12-18T07:35:27.000Z" title="发表于 2024-12-18 15:35:27">2024-12-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-12-21T04:13:28.180Z" title="更新于 2024-12-21 12:13:28">2024-12-21</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/CSAPP/">CSAPP</a></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>异常控制流是控制流的突变，不一定与程序的执行有关。跳转和分支、过程调用和返回不属于异常控制流</p>
+<h2 id="处理器异常"><a href="#处理器异常" class="headerlink" title="处理器异常"></a>处理器异常</h2><p>硬件和操作系统相互配合实现 </p>
+<p>异常号-&gt;异常向量表-&gt;异常处理函数</p>
+<p>异常返回：1.正在执行的指令 2.下一条指令 3.终止</p>
+<p>异步异常：中断(I&#x2F;O设备)</p>
+<p>同步异常：陷阱(系统调用、断点)，故障(缺页、保护、除零)，终止(非法指令、奇偶校验)</p>
+<p>异常表由操作系统创建，常驻在内存中</p>
+<h2 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h2><p>进程是执行中的程序，包括独立的逻辑控制流和私有的地址空间</p>
+<p>并发：一个逻辑流的执行在时间上与另一个流重叠</p>
+<p>并行：两个流并发地运行在不同的处理器核或计算机上</p>
+<p>私有地址空间：</p>
+<p><img src="/2024/12/18/%E5%BC%82%E5%B8%B8%E6%8E%A7%E5%88%B6%E6%B5%81/1.png" alt="进程地址空间"></p>
+<p>用户程序必须通过系统调用接口间接访问内核代码和数据，linux提供&#x2F;proc文件系统允许用户进程访问内核数据结构。</p>
+<p>上下文就是内核重新启动一个被抢占的进程所需的状态。它由一些对象的值组成，这些对象包括通用目的寄存器、浮点寄存器、程序计数器、用户栈、状态寄存器、内核栈和各种内核数据结构，比如描述地址空间的页表、包含有关当前进程信息的进程表，以及包含进程已打开文件的信息的文件表。</p>
+<h2 id="系统调用错误处理"><a href="#系统调用错误处理" class="headerlink" title="系统调用错误处理"></a>系统调用错误处理</h2><p>Unix系统级函数遇到错误时，通常会返回-1，并设置全局整数变量errno</p>
+<blockquote>
+<p>errno详解</p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/Jimmy1988/p/7485133.html">Linux errno详解 - Jimmy_Nie - 博客园 (cnblogs.com)</a></p>
+</blockquote>
+<p>头文件 errno.h</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">void</span> <span class="title function_">unix_error</span><span class="params">(<span class="type">char</span> *msg)</span> <span class="comment">/* Unix-style error */</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">fprintf</span>(<span class="built_in">stderr</span>, <span class="string">&quot;%s: %s\n&quot;</span>, msg, strerror(errno));</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="进程控制"><a href="#进程控制" class="headerlink" title="进程控制"></a>进程控制</h2><p>fork函数创建子进程，几乎与父进程相同，子进程获得与父进程任何打开文件描述符相同的副本，只有PID不同，利用了写时复制技术。调用一次，返回两次，父进程返回子进程的pid,子进程返回0</p>
+<p>waitpid函数回收子进程，当子进程终止但父进程未调用<code>wait</code>或<code>waitpid</code>回收其状态时，子进程会变成<strong>僵尸进程</strong>。</p>
+<p>execve函数加载并运行程序，它会覆盖当前进程的地址空间，并没有创建新进程，新的程序仍然有相同的pid,并继承打开的所有文件描述符，调用一次从不返回</p>
+<h2 id="信号"><a href="#信号" class="headerlink" title="信号"></a>信号</h2><p>常用信号：</p>
+<p>SIGINT ctrl+c终止 SIGTERM终止 SIGSTOP停止进程 SIGKILL杀死进程 SIGCONT恢复进程 SIGCHLD子进程终止 SIGSEGV段故障 SIGHUP终端线挂断 SIGFPE浮点异常</p>
+<p>发送信号：kill程序、kill函数、alarm函数</p>
+<p>接收信号：默认行为：进程终止、进程停止、忽略信号</p>
+<p>信号的阻塞机制</p>
+<p>信号不排队</p>
+<h2 id="shell程序的架构"><a href="#shell程序的架构" class="headerlink" title="shell程序的架构"></a>shell程序的架构</h2><p>shell 打印一个命令行提示符，等待用户在 stdin 上 输入命令行，然后对这个命令行求值。</p>
+<p>shell的main函数：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&quot;csapp.h&quot;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> MAXARGS 128</span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* Function prototypes */</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">eval</span><span class="params">(<span class="type">char</span> *cmdline)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">parseline</span><span class="params">(<span class="type">char</span> *buf, <span class="type">char</span> **argv)</span>;</span><br><span class="line"><span class="type">int</span> <span class="title function_">builtin_command</span><span class="params">(<span class="type">char</span> **argv)</span>;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> cmdline[MAXLINE]; <span class="comment">/* Command line */</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">        <span class="comment">/* Read */</span></span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">&quot;&gt; &quot;</span>);</span><br><span class="line">        Fgets(cmdline, MAXLINE, <span class="built_in">stdin</span>);</span><br><span class="line">        <span class="keyword">if</span> (feof(<span class="built_in">stdin</span>))</span><br><span class="line">            <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* Evaluate */</span></span><br><span class="line">        eval(cmdline);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>eval函数对命令行求值:</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* eval - Evaluate a command line */</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">eval</span><span class="params">(<span class="type">char</span> *cmdline)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> *argv[MAXARGS]; <span class="comment">/* Argument list execve() */</span></span><br><span class="line">    <span class="type">char</span> buf[MAXLINE];   <span class="comment">/* Holds modified command line */</span></span><br><span class="line">    <span class="type">int</span> bg;              <span class="comment">/* Should the job run in bg or fg? */</span></span><br><span class="line">    <span class="type">pid_t</span> pid;           <span class="comment">/* Process id */</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">strcpy</span>(buf, cmdline);</span><br><span class="line">    bg = parseline(buf, argv);</span><br><span class="line">    <span class="keyword">if</span> (argv[<span class="number">0</span>] == <span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span>;   <span class="comment">/* Ignore empty lines */</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!builtin_command(argv)) &#123;</span><br><span class="line">        <span class="keyword">if</span> ((pid = Fork()) == <span class="number">0</span>) &#123;   <span class="comment">/* Child runs user job */</span></span><br><span class="line">            <span class="keyword">if</span> (execve(argv[<span class="number">0</span>], argv, environ) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">                <span class="built_in">printf</span>(<span class="string">&quot;%s: Command not found.\n&quot;</span>, argv[<span class="number">0</span>]);</span><br><span class="line">                <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">/* Parent waits for foreground job to terminate */</span></span><br><span class="line">        <span class="keyword">if</span> (!bg) &#123;</span><br><span class="line">            <span class="type">int</span> status;</span><br><span class="line">            <span class="keyword">if</span> (waitpid(pid, &amp;status, <span class="number">0</span>) &lt; <span class="number">0</span>)</span><br><span class="line">                unix_error(<span class="string">&quot;waitfg: waitpid error&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d %s&quot;</span>, pid, cmdline);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* If first arg is a builtin command, run it and return true */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">builtin_command</span><span class="params">(<span class="type">char</span> **argv)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">strcmp</span>(argv[<span class="number">0</span>], <span class="string">&quot;quit&quot;</span>)) <span class="comment">/* quit command */</span></span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">    <span class="keyword">if</span> (!<span class="built_in">strcmp</span>(argv[<span class="number">0</span>], <span class="string">&quot;&amp;&quot;</span>))    <span class="comment">/* Ignore singleton &amp; */</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;                     <span class="comment">/* Not a builtin command */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>parseline函数解析了以空格分隔的命令行参数，并构造最终会传递给 execve 的 argv 向量。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* parseline - Parse the command line and build the argv array */</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">parseline</span><span class="params">(<span class="type">char</span> *buf, <span class="type">char</span> **argv)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> *delim;         <span class="comment">/* Points to first space delimiter */</span></span><br><span class="line">    <span class="type">int</span> argc;            <span class="comment">/* Number of args */</span></span><br><span class="line">    <span class="type">int</span> bg;              <span class="comment">/* Background job? */</span></span><br><span class="line"></span><br><span class="line">    buf[<span class="built_in">strlen</span>(buf)<span class="number">-1</span>] = <span class="string">&#x27; &#x27;</span>;  <span class="comment">/* Replace trailing &#x27;\n&#x27; with space */</span></span><br><span class="line">    <span class="keyword">while</span> (*buf &amp;&amp; (*buf == <span class="string">&#x27; &#x27;</span>)) <span class="comment">/* Ignore leading spaces */</span></span><br><span class="line">        buf++;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Build the argv list */</span></span><br><span class="line">    argc = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span> ((delim = <span class="built_in">strchr</span>(buf, <span class="string">&#x27; &#x27;</span>))) &#123;</span><br><span class="line">        argv[argc++] = buf;</span><br><span class="line">        *delim = <span class="string">&#x27;\0&#x27;</span>;</span><br><span class="line">        buf = delim + <span class="number">1</span>;</span><br><span class="line">        <span class="keyword">while</span> (*buf &amp;&amp; (*buf == <span class="string">&#x27; &#x27;</span>)) <span class="comment">/* Ignore spaces */</span></span><br><span class="line">            buf++;</span><br><span class="line">    &#125;</span><br><span class="line">    argv[argc] = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (argc == <span class="number">0</span>) <span class="comment">/* Ignore blank line */</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/* Should the job run in the background? */</span></span><br><span class="line">    <span class="keyword">if</span> ((bg = (*argv[argc<span class="number">-1</span>] == <span class="string">&#x27;&amp;&#x27;</span>)) != <span class="number">0</span>)</span><br><span class="line">        argv[--argc] = <span class="literal">NULL</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> bg;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这个简单的 shell 是有缺陷的，因为它并不回收它的后台子进程。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://xinyi234.github.io">xinyi</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://xinyi234.github.io/2024/12/18/%E5%BC%82%E5%B8%B8%E6%8E%A7%E5%88%B6%E6%B5%81/">https://xinyi234.github.io/2024/12/18/%E5%BC%82%E5%B8%B8%E6%8E%A7%E5%88%B6%E6%B5%81/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://xinyi234.github.io" target="_blank">Xinyi's blog</a>！</span></div></div><div class="tag_share"><div class="post-share"><div class="social-share" data-image="/img/head.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2024/12/17/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" title="并发编程"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">并发编程</div></div><div class="info-2"><div class="info-item-1">基于进程的并发编程服务器监听一个监听描述符的连接请求，假设服务器接受客户端1的连接请求并返回一个已连接描述符，服务器派生子进程，这个子进程获得服务器描述符表的完整副本。子进程关闭他的副本中的监听描述符3，父进程关闭已连接描述符4的副本。 1234567891011121314151617181920212223242526272829303132333435#include &quot;csapp.h&quot;void echo(int connfd);void sigchld_handler(int sig)&#123;    while (waitpid(-1, 0, WNOHANG) &gt; 0)        ;    return;&#125;int main(int argc, char **argv)&#123;    int listenfd, connfd;    socklen_t clientlen;    struct sockaddr_storage clientaddr;    if (argc != 2) &#123;       ...</div></div></div></a></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">xinyi</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">4</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">3</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">2</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xinyi234"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/xinyi234" target="_blank" title="Github"><i class="fab fa-github" style="color: #ffffff;"></i></a><a class="social-icon" href="mailto:lijialin8917@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #ffffff;"></i></a><a class="social-icon" href="/3630016869" target="_blank" title="QQ"><i class="fa fa-qq" style="color: #ffffff;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%84%E7%90%86%E5%99%A8%E5%BC%82%E5%B8%B8"><span class="toc-number">1.</span> <span class="toc-text">处理器异常</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B"><span class="toc-number">2.</span> <span class="toc-text">进程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%B3%BB%E7%BB%9F%E8%B0%83%E7%94%A8%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86"><span class="toc-number">3.</span> <span class="toc-text">系统调用错误处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E6%8E%A7%E5%88%B6"><span class="toc-number">4.</span> <span class="toc-text">进程控制</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BF%A1%E5%8F%B7"><span class="toc-number">5.</span> <span class="toc-text">信号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#shell%E7%A8%8B%E5%BA%8F%E7%9A%84%E6%9E%B6%E6%9E%84"><span class="toc-number">6.</span> <span class="toc-text">shell程序的架构</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/18/%E5%BC%82%E5%B8%B8%E6%8E%A7%E5%88%B6%E6%B5%81/" title="异常控制流">异常控制流</a><time datetime="2024-12-18T07:35:27.000Z" title="发表于 2024-12-18 15:35:27">2024-12-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/17/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B/" title="并发编程">并发编程</a><time datetime="2024-12-17T08:13:36.000Z" title="发表于 2024-12-17 16:13:36">2024-12-17</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/16/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" title="网络编程">网络编程</a><time datetime="2024-12-16T10:54:11.000Z" title="发表于 2024-12-16 18:54:11">2024-12-16</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/12/06/Reverse%E5%88%B7%E9%A2%98%E7%AC%94%E8%AE%B0/" title="Reverse刷题笔记">Reverse刷题笔记</a><time datetime="2024-12-06T15:02:22.000Z" title="发表于 2024-12-06 23:02:22">2024-12-06</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2024 By xinyi</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"></div></div></body></html>
