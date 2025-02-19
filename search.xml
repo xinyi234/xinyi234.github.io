@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>hgame2025</title>
+      <link href="/2025/02/19/hgame2025/"/>
+      <url>/2025/02/19/hgame2025/</url>
+      
+        <content type="html"><![CDATA[<p>hgame比赛有两周，可惜到最后没坚持下来☹️，能够自己解出来很简单的题，也是小小的收获</p><h3 id="Hakuya-Want-A-Girl-Friend"><a href="#Hakuya-Want-A-Girl-Friend" class="headerlink" title="Hakuya Want A Girl Friend"></a>Hakuya Want A Girl Friend</h3><p>16进制文件正序是zip,倒序是png，png宽高爆破后得到zip的密码，解压得到flag</p><h3 id="Computer-Cleaner"><a href="#Computer-Cleaner" class="headerlink" title="Computer Cleaner"></a>Computer Cleaner</h3><p>找到一句话木马文件，得到第一部分flag,查看日志，攻击者试图读flag3文件，找到flag3,访问日志中的攻击者ip得到flag2</p><h3 id="Compress-dot-new"><a href="#Compress-dot-new" class="headerlink" title="Compress dot new"></a>Compress dot new</h3><p>当时直接用AI生成脚本😣，现在没看懂，以后再学吧</p><h3 id="Turtle"><a href="#Turtle" class="headerlink" title="Turtle"></a>Turtle</h3><p>upx壳，用工具脱不下来，于是用x64dbg手脱。打开ida理清逻辑，key用RC4加密，密文是用魔改RC4加密，用脚本解密成功</p><p>😔虽然很简单的过程，这道题做了好久，还需要学好多</p><p>剩下的题还没有学会啊</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>VNCTF-re</title>
       <link href="/2025/02/16/VNCTF-re/"/>
       <url>/2025/02/16/VNCTF-re/</url>
