@@ -4,6 +4,19 @@
   
     
     <entry>
+      <title>web签个到</title>
+      <link href="/2025/03/27/web%E7%AD%BE%E4%B8%AA%E5%88%B0/"/>
+      <url>/2025/03/27/web%E7%AD%BE%E4%B8%AA%E5%88%B0/</url>
+      
+        <content type="html"><![CDATA[<h2 id="buuctf-ACTF2020-新生赛-Include"><a href="#buuctf-ACTF2020-新生赛-Include" class="headerlink" title="buuctf[ACTF2020 新生赛]Include"></a>buuctf[ACTF2020 新生赛]Include</h2><p>打开靶机看到页面只有一个tips</p><p><img src="/2025/03/27/web%E7%AD%BE%E4%B8%AA%E5%88%B0/1.png" alt="1"></p><p>点击一下</p><p><img src="/2025/03/27/web%E7%AD%BE%E4%B8%AA%E5%88%B0/2.png" alt="2"></p><p>看源码什么也没有，结合题目include猜测是文件包含</p><p>来个链接学一下 <a href="https://blog.csdn.net/m0_46467017/article/details/126380415">https://blog.csdn.net/m0_46467017/article/details/126380415</a></p><p>我们可以用php伪协议，再来个链接 <a href="https://blog.csdn.net/cosmoslin/article/details/120695429">https://blog.csdn.net/cosmoslin/article/details/120695429</a></p><p>我们可以用php:&#x2F;&#x2F;filiter读取源码</p><p>php:&#x2F;&#x2F;filter&#x2F;read&#x3D;convert.base64-encode&#x2F;resource&#x3D;flag.php</p><p><img src="/2025/03/27/web%E7%AD%BE%E4%B8%AA%E5%88%B0/3.png" alt="3"></p><p>base64解密以下得到flag</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">好久没学新东西了，突然发现web的入门题还是很好玩的。脑子有点混乱了，还有很多东西要学啊，没关系，</span><br><span class="line">今天又进步了一点😊</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>hgame2025</title>
       <link href="/2025/02/19/hgame2025/"/>
       <url>/2025/02/19/hgame2025/</url>
