@@ -1,0 +1,226 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Nepctf2025 | Xinyi's blog</title><meta name="author" content="xinyi"><meta name="copyright" content="xinyi"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="比赛进行的两天还在外地，这几天打算做一遍题目，题目很好啊，可惜我好菜😶 复现复现复现 CryptoNepsignsm3参考链接：https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_40662424&#x2F;article&#x2F;details&#x2F;121637732 SM3是一种由中国国家密码管理局公布的商用密码杂凑算法，与SHA-256安全相当，四个步骤：消息填充、消息扩展、迭代压缩、输出结果。消息分组长度为51">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nepctf2025">
+<meta property="og:url" content="https://xinyi234.github.io/2025/08/01/Nepctf2025/index.html">
+<meta property="og:site_name" content="Xinyi&#39;s blog">
+<meta property="og:description" content="比赛进行的两天还在外地，这几天打算做一遍题目，题目很好啊，可惜我好菜😶 复现复现复现 CryptoNepsignsm3参考链接：https:&#x2F;&#x2F;blog.csdn.net&#x2F;qq_40662424&#x2F;article&#x2F;details&#x2F;121637732 SM3是一种由中国国家密码管理局公布的商用密码杂凑算法，与SHA-256安全相当，四个步骤：消息填充、消息扩展、迭代压缩、输出结果。消息分组长度为51">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://xinyi234.github.io/img/gudu1.png">
+<meta property="article:published_time" content="2025-08-01T12:26:10.000Z">
+<meta property="article:modified_time" content="2025-08-03T02:51:50.679Z">
+<meta property="article:author" content="xinyi">
+<meta property="article:tag" content="复现">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://xinyi234.github.io/img/gudu1.png"><link rel="shortcut icon" href="/img/head.jpg"><link rel="canonical" href="https://xinyi234.github.io/2025/08/01/Nepctf2025/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: '[object Object]',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Nepctf2025',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  isShuoshuo: false
+}</script><link rel="stylesheet" href="/css/background.css"><meta name="generator" content="Hexo 7.3.0"></head><body><div id="web_bg" style="background-color: #efefef;"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/head.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg fixed" id="page-header" style="background-image: url(/img/gudu1.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/head.jpg" alt="Logo"><span class="site-name">Xinyi's blog</span></a><a class="nav-page-title" href="/"><span class="site-name">Nepctf2025</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">Nepctf2025</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-08-01T12:26:10.000Z" title="发表于 2025-08-01 20:26:10">2025-08-01</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-08-03T02:51:50.679Z" title="更新于 2025-08-03 10:51:50">2025-08-03</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Re/">Re</a></span></div><div class="meta-secondline"></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="container post-content" id="article-container"><p>比赛进行的两天还在外地，这几天打算做一遍题目，题目很好啊，可惜我好菜😶</p>
+<p>复现复现复现</p>
+<h1 id="Crypto"><a href="#Crypto" class="headerlink" title="Crypto"></a>Crypto</h1><h2 id="Nepsign"><a href="#Nepsign" class="headerlink" title="Nepsign"></a>Nepsign</h2><p>sm3参考链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_40662424/article/details/121637732">https://blog.csdn.net/qq_40662424/article/details/121637732</a></p>
+<p>SM3是一种由中国国家密码管理局公布的商用密码杂凑算法，与SHA-256安全相当，四个步骤：消息填充、消息扩展、迭代压缩、输出结果。消息分组长度为512位，摘要长度为256位</p>
+<p>分析server.py</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">SM3</span>(<span class="params">data</span>):</span><br><span class="line">    d = [i <span class="keyword">for</span> i <span class="keyword">in</span> data]</span><br><span class="line">    h = sm3.sm3_hash(d)</span><br><span class="line">    <span class="keyword">return</span> h</span><br></pre></td></tr></table></figure>
+
+<p>用于计算输入数据的 SM3 哈希值 的 Python 函数，基于gmssl库</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">SM3_n</span>(<span class="params">data, n=<span class="number">1</span>, bits=<span class="number">256</span></span>):</span><br><span class="line">    <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n):</span><br><span class="line">        data = <span class="built_in">bytes</span>.fromhex(SM3(data))</span><br><span class="line">    <span class="keyword">return</span> data.<span class="built_in">hex</span>()[:bits // <span class="number">4</span>]</span><br></pre></td></tr></table></figure>
+
+<p><code>SM3_n</code> 是一个 迭代哈希计算函数，它对输入数据进行n次 SM3 哈希运算，并最终返回指定位数的哈希值</p>
+<p>Nepsign类</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Nepsign</span>():</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        self.n = <span class="number">256</span></span><br><span class="line">        self.hex_symbols = <span class="string">&#x27;0123456789abcdef&#x27;</span> <span class="comment"># 16进制字符集</span></span><br><span class="line">        self.keygen() <span class="comment"># 生成密钥对</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">keygen</span>(<span class="params">self</span>):</span><br><span class="line">        rng = SystemRandom()</span><br><span class="line">        self.sk = [rng.randbytes(<span class="number">32</span>) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">48</span>)]</span><br><span class="line">        self.pk = [SM3_n(self.sk[_], <span class="number">255</span>, self.n) <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">48</span>)]</span><br><span class="line">        <span class="keyword">return</span> self.sk, self.pk</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">sign</span>(<span class="params">self, msg, sk=<span class="literal">None</span></span>):</span><br><span class="line">        sk = sk <span class="keyword">if</span> sk <span class="keyword">else</span> self.sk</span><br><span class="line">        m = SM3(msg)</span><br><span class="line">        m_bin = <span class="built_in">bin</span>(<span class="built_in">int</span>(m, <span class="number">16</span>))[<span class="number">2</span>:].zfill(<span class="number">256</span>)</span><br><span class="line">        a = [<span class="built_in">int</span>(m_bin[<span class="number">8</span> * i: <span class="number">8</span> * i + <span class="number">8</span>], <span class="number">2</span>) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(self.n // <span class="number">8</span>)]</span><br><span class="line">        step = [<span class="number">0</span>] * <span class="number">48</span>;</span><br><span class="line">        qq = [<span class="number">0</span>] * <span class="number">48</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">32</span>):</span><br><span class="line">            step[i] = a[i]</span><br><span class="line">            qq[i] = SM3_n(sk[i], step[i])</span><br><span class="line">        <span class="built_in">sum</span> = [<span class="number">0</span>] * <span class="number">16</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">16</span>):</span><br><span class="line">            <span class="built_in">sum</span>[i] = <span class="number">0</span></span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">65</span>):</span><br><span class="line">                <span class="keyword">if</span> m[j - <span class="number">1</span>] == self.hex_symbols[i]:</span><br><span class="line">                    <span class="built_in">sum</span>[i] += j</span><br><span class="line">            step[i + <span class="number">32</span>] = <span class="built_in">sum</span>[i] % <span class="number">255</span></span><br><span class="line">            qq[i + <span class="number">32</span>] = SM3_n(sk[i + <span class="number">32</span>], step[i + <span class="number">32</span>])</span><br><span class="line">        <span class="keyword">return</span> [i <span class="keyword">for</span> i <span class="keyword">in</span> qq]</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">verify</span>(<span class="params">self, msg, qq, pk=<span class="literal">None</span></span>):</span><br><span class="line">        qq = [<span class="built_in">bytes</span>.fromhex(i) <span class="keyword">for</span> i <span class="keyword">in</span> qq]</span><br><span class="line">        pk = pk <span class="keyword">if</span> pk <span class="keyword">else</span> self.pk</span><br><span class="line">        m = SM3(msg)</span><br><span class="line">        m_bin = <span class="built_in">bin</span>(<span class="built_in">int</span>(m, <span class="number">16</span>))[<span class="number">2</span>:].zfill(<span class="number">256</span>)</span><br><span class="line">        a = [<span class="built_in">int</span>(m_bin[<span class="number">8</span> * i: <span class="number">8</span> * i + <span class="number">8</span>], <span class="number">2</span>) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(self.n // <span class="number">8</span>)]</span><br><span class="line">        step = [<span class="number">0</span>] * <span class="number">48</span>;</span><br><span class="line">        pk_ = [<span class="number">0</span>] * <span class="number">48</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">32</span>):</span><br><span class="line">            step[i] = a[i]</span><br><span class="line">            pk_[i] = SM3_n(qq[i], <span class="number">255</span> - step[i])</span><br><span class="line">        <span class="built_in">sum</span> = [<span class="number">0</span>] * <span class="number">16</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">16</span>):</span><br><span class="line">            <span class="built_in">sum</span>[i] = <span class="number">0</span></span><br><span class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">65</span>):</span><br><span class="line">                <span class="keyword">if</span> m[j - <span class="number">1</span>] == self.hex_symbols[i]:</span><br><span class="line">                    <span class="built_in">sum</span>[i] += j</span><br><span class="line">            step[i + <span class="number">32</span>] = <span class="built_in">sum</span>[i] % <span class="number">255</span></span><br><span class="line">            pk_[i + <span class="number">32</span>] = SM3_n(qq[i + <span class="number">32</span>], <span class="number">255</span> - step[i + <span class="number">32</span>])</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">True</span> <span class="keyword">if</span> pk_ == pk <span class="keyword">else</span> <span class="literal">False</span></span><br></pre></td></tr></table></figure>
+
+<p>密钥生成keygen函数：使用随机数生成器生成48个32字节的私钥，对每个私钥进行255次SM3哈希得到公钥</p>
+<p>签名函数sign:计算msg的SM3哈希并转化为256位二进制，将哈希分成32个8位组，前32个签名元素使用消息哈希的每个字节值作为迭代次数对私钥进行哈希，后16个签名元素计算每个十六进制字符在哈希中的位置和，取模255作为迭代次数，返回签名数组</p>
+<p>验证函数verify:对签名进行”补足”哈希(255-step次)，应能得到公钥，比较计算出的公钥和存储的公钥是否一致</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;initializing...&#x27;</span>)</span><br><span class="line">Sign = Nepsign() <span class="comment"># 创建Nepsign实例，自动生成密钥对</span></span><br><span class="line"><span class="keyword">while</span> <span class="number">1</span>:</span><br><span class="line">    <span class="keyword">match</span> <span class="built_in">int</span>(<span class="built_in">input</span>(<span class="string">&#x27;&gt; &#x27;</span>)):</span><br><span class="line">        <span class="keyword">case</span> <span class="number">1</span>:</span><br><span class="line">            msg = <span class="built_in">bytes</span>.fromhex(<span class="built_in">input</span>(<span class="string">&#x27;msg: &#x27;</span>))</span><br><span class="line">            <span class="keyword">if</span> msg != <span class="string">b&#x27;happy for NepCTF 2025&#x27;</span>:</span><br><span class="line">                <span class="built_in">print</span>(Sign.sign(msg))</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                <span class="built_in">print</span>(<span class="string">&quot;You can&#x27;t do that&quot;</span>)</span><br><span class="line">        <span class="keyword">case</span> <span class="number">2</span>:</span><br><span class="line">            qq = literal_eval(<span class="built_in">input</span>(<span class="string">&#x27;give me a qq: &#x27;</span>))</span><br><span class="line">            <span class="keyword">if</span> Sign.verify(<span class="string">b&#x27;happy for NepCTF 2025&#x27;</span>, qq):</span><br><span class="line">                <span class="built_in">print</span>(flag)</span><br></pre></td></tr></table></figure>
+
+<p>实现了一个交互式的签名验证系统，选项一进行签名功能，但是不能对“happy for NepCTF 2025”签名，选项二验证happy for NepCTF 2025的签名，成功则会得到flag</p>
+<p>看这篇wp的攻击思路：<a target="_blank" rel="noopener" href="https://blog.csdn.net/2401_87558262/article/details/149733054">https://blog.csdn.net/2401_87558262/article/details/149733054</a></p>
+<ol>
+<li><strong>目标</strong><br>伪造消息 <code>b&#39;happy for NepCTF 2025&#39;</code> 的签名 <code>qq</code>，使得 <code>verify</code> 验证通过，从而获取flag。</li>
+<li><strong>关键</strong><ul>
+<li>验证时计算：<code>pk_[i] = SM3_n(qq[i], 255 - a[i])</code>，要求 <code>pk_[i] == pk[i]</code></li>
+<li>公钥生成时：<code>pk[i] = SM3_n(sk[i], 255)</code></li>
+<li>若 <code>a[i] = 0</code>，则 <code>qq[i] = sk[i]</code> 时验证必然通过（因为 <code>SM3_n(sk[i], 255) = pk[i]</code>）</li>
+</ul>
+</li>
+<li><strong>攻击路径</strong><ul>
+<li>通过其他消息的签名泄露 <code>sk[i]</code>（当 <code>a[i] = 0</code> 时，<code>qq[i] = sk[i]</code>）</li>
+<li>组合所有 <code>sk[i]</code> 构造目标签名。</li>
+</ul>
+</li>
+</ol>
+<p>compute_steps(msg)计算目标消息的hash参数a[i]和sum[i]</p>
+<p>collect_secrets(conn, msg_target, step_target)大量发送随机消息，找到满足a[i]&#x3D;0的消息，此时该消息的签名 qq[i] 就是 sk[i]（因为 SM3_n(sk[i], 0) &#x3D; sk[i]），重复直到找到48个sk[i]</p>
+<p>forge_signature(secret_keys, step_ref)伪造目标签名，对每个 <code>sk[i]</code> 计算 <code>SM3_n(sk[i], a_target[i])</code>，得到目标签名 <code>qq[i]</code>。验证时SM3_n(qq[i], 255 - a_target[i]) &#x3D; SM3_n(sk[i], 255) &#x3D; pk[i]，必然通过。</p>
+<p>ps:<a target="_blank" rel="noopener" href="https://faritree.top/2025/07/28/NepCTF2025-Crypto-WP/%E8%BF%99%E9%87%8C%E6%98%AF%E5%AF%86%E7%A0%81%E5%AD%A6%E5%85%A8%E9%83%A8%E7%9A%84wp">https://faritree.top/2025/07/28/NepCTF2025-Crypto-WP/这里是密码学全部的wp</a>(tql😮,看到这道题很棒的思路</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">签名由48个哈希值组成，当私钥相同时，每个位置的哈希值只与当前位置和step[i]有关，step[i]由签名的消息确定。所以先求出happy for NepCTF 2025的step，然后随机选取一些消息发送给服务器，从返回的签名中拿到(i,step[i])对应的哈希值，需要的签名都拿到后，发给服务器就行。</span><br><span class="line">----出自FariTree的wp</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="Re"><a href="#Re" class="headerlink" title="Re"></a>Re</h1><h2 id="realme"><a href="#realme" class="headerlink" title="realme"></a>realme</h2><p>根据<a target="_blank" rel="noopener" href="https://tkazer.github.io/2025/07/28/NepCTF2025/">Liv师傅的wp</a>复现</p>
+<p>反调试没怎么做过，认识了scyllahide插件(也许该系统学一下🤔</p>
+<p><img src="/2025/08/01/Nepctf2025/image-20250802103527546.png" alt="image-20250802103527546"></p>
+<p>在main函数下面发现了sub_401A60,是一个rc4加密的变形函数，但是没有被调用，应该有反调试，使用Scyllahide插件一键过反调试，动调断点该处代码，发现被调用</p>
+<p>有点问题…😣</p>
+<h1 id="Misc"><a href="#Misc" class="headerlink" title="Misc"></a>Misc</h1><h2 id="客服小美"><a href="#客服小美" class="headerlink" title="客服小美"></a>客服小美</h2><p>根据<a target="_blank" rel="noopener" href="https://dwd.moe/post/nepctf-2025%E5%A4%8D%E7%8E%B0">https://dwd.moe/post/nepctf-2025复现</a></p>
+<p>vol2教程<a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_68012373/article/details/127419463">https://blog.csdn.net/m0_68012373/article/details/127419463</a></p>
+<p><img src="/2025/08/01/Nepctf2025/image-20250803094605757.png" alt="image-20250803094605757"></p>
+<p>得到内存镜像的操作系统Win10x64_19041</p>
+<p>查看内存进程，发现可疑进程</p>
+<p><img src="/2025/08/01/Nepctf2025/image-20250803095241245.png" alt="image-20250803095241245"></p>
+<p>把这个进程dump出来6492.dmp</p>
+<p>分析流量，筛选出http流量</p>
+<p><img src="/2025/08/01/Nepctf2025/image-20250803102935913.png" alt="image-20250803102935913"></p>
+<p><img src="/2025/08/01/Nepctf2025/image-20250803103016222.png" alt="image-20250803103016222"></p>
+<p>其实这里可以看出通信的ip和端口</p>
+<p>CS流量解密可以看一篇博客<a target="_blank" rel="noopener" href="https://blog.csdn.net/AomCC/article/details/133298604">https://blog.csdn.net/AomCC/article/details/133298604</a></p>
+<p>这里我直接用 <code>cs-extract-key.py</code> 尝试提取密钥</p>
+<p><img src="/2025/08/01/Nepctf2025/image-20250803104104121.png" alt="image-20250803104104121"></p>
+<p>通过提取的密钥解密</p>
+<p> python cs-parse-traffic.py -k 35d34ac8778482751682514436d71e09:a6f4a04f8a6aa5ff27a5bcdd5ef3b9a7 .&#x2F;DESKTOP.pcapng</p>
+<p>发现了用户名JohnDoe</p>
+<p><img src="/2025/08/01/Nepctf2025/image-20250803104529272.png" alt="image-20250803104529272"></p>
+<p>发现了secret.txt</p>
+<p><img src="/2025/08/01/Nepctf2025/image-20250803104625879.png" alt="image-20250803104625879"></p>
+<p>得到了flag NepCTF{JohnDoe_192.168.27.132:12580_5c1eb2c4-0b85-491f-8d50-4e965b9d8a43}</p>
+<p>未完待续</p>
+<p>参考的好多wp🤩(真强啊</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/2401_87558262/article/details/149733054">https://blog.csdn.net/2401_87558262/article/details/149733054</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/LAMENTXU/articles/19007988">https://www.cnblogs.com/LAMENTXU/articles/19007988</a></p>
+<p><a target="_blank" rel="noopener" href="https://faritree.top/2025/07/28/NepCTF2025-Crypto-WP/">https://faritree.top/2025/07/28/NepCTF2025-Crypto-WP/</a></p>
+<p><a target="_blank" rel="noopener" href="https://tkazer.github.io/2025/07/28/NepCTF2025/">https://tkazer.github.io/2025/07/28/NepCTF2025/</a></p>
+<p><a target="_blank" rel="noopener" href="https://2hi5hu.cn/archives/nepctf2025">https://2hi5hu.cn/archives/nepctf2025</a></p>
+<p><a target="_blank" rel="noopener" href="https://dwd.moe/post/nepctf-2025">https://dwd.moe/post/nepctf-2025</a></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://xinyi234.github.io">xinyi</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://xinyi234.github.io/2025/08/01/Nepctf2025/">https://xinyi234.github.io/2025/08/01/Nepctf2025/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://xinyi234.github.io" target="_blank">Xinyi's blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E5%A4%8D%E7%8E%B0/">复现</a></div><div class="post-share"><div class="social-share" data-image="/img/gudu1.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related full-width" href="/2025/07/19/Re%E7%9A%84%E8%AE%B0%E5%BD%95/" title="Re的记录"><img class="cover" src="/img/gudu1.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">Re的记录</div></div><div class="info-2"><div class="info-item-1">  ...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/2025/02/16/VNCTF-re/" title="VNCTF-re"><img class="cover" src="/img/gudu1.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-02-16</div><div class="info-item-2">VNCTF-re</div></div><div class="info-2"><div class="info-item-1">😫今天终于想起来复现了，这次比赛没做出来一道题，好惨 hook_fish分析过程 总之就是输入flag验证是否正确 先找到主函数  check验证函数应该在hook_fish.dex中，根据fish函数的参数hookfish找到下载链接  输入的flag先经过本地encrypt函数加密，再经过hook_fish.dex中的check方法进行混淆 解密过程 check方法用哈希映射加密，在mainactivity中保留了decode方法，可以用hook方法解密 123456789101112Java.perform(function() &#123;    var MainActivity =    Java.use(&quot;com.example.hihitt.MainActivity&quot;);    console.log(&quot;找到类: com.example.hihitt.MainActivity&quot;);    //hook 掉删除的方法，并直接在此方法中进行解密    MainActivity.fish_fade.implementation...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">xinyi</div><div class="author-info-description"></div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">19</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">6</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/xinyi234"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/xinyi234" target="_blank" title="Github"><i class="fab fa-github" style="color: #ffffff;"></i></a><a class="social-icon" href="mailto:lijialin8917@qq.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #ffffff;"></i></a><a class="social-icon" href="/3630016869" target="_blank" title="QQ"><i class="fa fa-qq" style="color: #ffffff;"></i></a></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Crypto"><span class="toc-number">1.</span> <span class="toc-text">Crypto</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Nepsign"><span class="toc-number">1.1.</span> <span class="toc-text">Nepsign</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Re"><span class="toc-number">2.</span> <span class="toc-text">Re</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#realme"><span class="toc-number">2.1.</span> <span class="toc-text">realme</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Misc"><span class="toc-number">3.</span> <span class="toc-text">Misc</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%A2%E6%9C%8D%E5%B0%8F%E7%BE%8E"><span class="toc-number">3.1.</span> <span class="toc-text">客服小美</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2025/08/01/Nepctf2025/" title="Nepctf2025"><img src="/img/gudu1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Nepctf2025"/></a><div class="content"><a class="title" href="/2025/08/01/Nepctf2025/" title="Nepctf2025">Nepctf2025</a><time datetime="2025-08-01T12:26:10.000Z" title="发表于 2025-08-01 20:26:10">2025-08-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/07/19/Re%E7%9A%84%E8%AE%B0%E5%BD%95/" title="Re的记录"><img src="/img/gudu1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Re的记录"/></a><div class="content"><a class="title" href="/2025/07/19/Re%E7%9A%84%E8%AE%B0%E5%BD%95/" title="Re的记录">Re的记录</a><time datetime="2025-07-19T04:02:27.000Z" title="发表于 2025-07-19 12:02:27">2025-07-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/07/16/%E4%BB%A5%E5%90%8E/" title="以后"><img src="/img/gudu2.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="以后"/></a><div class="content"><a class="title" href="/2025/07/16/%E4%BB%A5%E5%90%8E/" title="以后">以后</a><time datetime="2025-07-16T15:11:35.000Z" title="发表于 2025-07-16 23:11:35">2025-07-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/07/16/RSA%E5%8E%9F%E7%90%86/" title="RSA原理"><img src="/img/gudu2.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="RSA原理"/></a><div class="content"><a class="title" href="/2025/07/16/RSA%E5%8E%9F%E7%90%86/" title="RSA原理">RSA原理</a><time datetime="2025-07-16T10:23:37.000Z" title="发表于 2025-07-16 18:23:37">2025-07-16</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2025/07/13/%E4%BA%91%E9%95%9C-hospital/" title="云镜-hospital"><img src="/img/gudu1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="云镜-hospital"/></a><div class="content"><a class="title" href="/2025/07/13/%E4%BA%91%E9%95%9C-hospital/" title="云镜-hospital">云镜-hospital</a><time datetime="2025-07-13T06:30:26.000Z" title="发表于 2025-07-13 14:30:26">2025-07-13</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2024 - 2025 By xinyi</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/"></script><div class="js-pjax"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script></div></body></html>
