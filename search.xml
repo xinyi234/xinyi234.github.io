@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>操作系统设计实践</title>
+      <link href="/2025/09/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5/"/>
+      <url>/2025/09/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5/</url>
+      
+        <content type="html"><![CDATA[<p>2018年以前的是x86平台，2019年开始改为risc-v平台。<br><a href="https://pdos.csail.mit.edu/6.828/2025/xv6.html">https://pdos.csail.mit.edu/6.828/2025/xv6.html</a></p><p><a href="https://lihaoran.work/wp-content/uploads/2023/08/xv6-chinese.pdf">xv6 中文文档</a></p><h1 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h1><p>ubuntu24.04虚拟机</p><p><code>sudo apt-get install git build-essential gdb-multiarch qemu-system-misc gcc-riscv64-linux-gnu binutils-riscv64-linux-gnu</code></p><h1 id="源码分析"><a href="#源码分析" class="headerlink" title="源码分析"></a>源码分析</h1><h3 id="1-kernel-目录-内核核心代码"><a href="#1-kernel-目录-内核核心代码" class="headerlink" title="1. kernel&#x2F; 目录 - 内核核心代码"></a>1. kernel&#x2F; 目录 - 内核核心代码</h3><p>这是xv6操作系统的内核部分，包含所有核心功能：</p><p>进程管理：</p><ul><li><p>proc.c, proc.h - 进程控制块(PCB)和进程管理</p></li><li><p>exec.c - 程序执行和加载</p></li><li><p>swtch.S - 进程上下文切换的汇编代码</p></li></ul><p>内存管理：</p><ul><li><p>kalloc.c - 内核内存分配器</p></li><li><p>vm.c, vm.h - 虚拟内存管理</p></li><li><p>memlayout.h - 内存布局定义</p></li></ul><p>文件系统：</p><ul><li><p>file.c, file.h - 文件操作接口</p></li><li><p>fs.c, fs.h - 文件系统实现</p></li><li><p>log.c - 文件系统日志和崩溃恢复</p></li><li><p>bio.c, buf.h - 块设备I&#x2F;O和缓冲区管理</p></li></ul><p>系统调用：</p><ul><li><p>syscall.c, syscall.h - 系统调用分发器</p></li><li><p>sysfile.c - 文件相关系统调用实现</p></li><li><p>sysproc.c - 进程相关系统调用实现</p></li></ul><p>硬件抽象层：</p><ul><li><p>trap.c - 中断和异常处理</p></li><li><p>uart.c - 串口通信</p></li><li><p>virtio_disk.c, virtio.h - 磁盘I&#x2F;O</p></li><li><p>plic.c - 平台级中断控制器</p></li></ul><p>同步机制：</p><ul><li><p>spinlock.c, spinlock.h - 自旋锁实现</p></li><li><p>sleeplock.c, sleeplock.h - 睡眠锁实现</p></li></ul><p>其他核心组件：</p><ul><li><p>main.c - 内核启动入口</p></li><li><p>entry.S - 内核入口汇编代码</p></li><li><p>start.c - 系统启动初始化</p></li><li><p>console.c - 控制台I&#x2F;O</p></li><li><p>printf.c - 格式化输出</p></li><li><p>string.c - 字符串操作函数</p></li></ul><h3 id="2-user-目录-用户空间程序"><a href="#2-user-目录-用户空间程序" class="headerlink" title="2. user&#x2F; 目录 - 用户空间程序"></a>2. user&#x2F; 目录 - 用户空间程序</h3><p>包含所有用户态程序和工具：</p><p>系统工具：</p><ul><li><p>cat.c - 文件内容显示</p></li><li><p>echo.c - 回显命令</p></li><li><p>grep.c - 文本搜索</p></li><li><p>ls.c - 目录列表</p></li><li><p>mkdir.c - 创建目录</p></li><li><p>rm.c - 删除文件</p></li><li><p>ln.c - 创建链接</p></li><li><p>wc.c - 字符&#x2F;词&#x2F;行计数</p></li><li><p>sleep.c - 休眠命令</p></li><li><p>kill.c - 终止进程</p></li></ul><p>Shell和系统：</p><ul><li><p>sh.c - Shell解释器</p></li><li><p>init.c - 系统初始化进程</p></li><li><p>memdump.c - 内存转储工具</p></li></ul><p>测试程序：</p><ul><li><p>usertests.c - 用户态测试套件</p></li><li><p>forktest.c - 进程创建测试</p></li><li><p>grind.c - 压力测试</p></li><li><p>stressfs.c - 文件系统压力测试</p></li><li><p>logstress.c - 日志压力测试</p></li></ul><p>库函数：</p><ul><li><p>ulib.c - 用户态库函数</p></li><li><p>umalloc.c - 用户态内存分配</p></li><li><p>printf.c - 用户态格式化输出</p></li><li><p>user.h - 用户态头文件定义</p></li></ul><p>系统调用接口：</p><ul><li><p>usys.pl - 生成系统调用汇编代码的Perl脚本</p></li><li><p>user.ld - 用户程序链接脚本</p></li></ul><h3 id="3-mkfs-目录-文件系统工具"><a href="#3-mkfs-目录-文件系统工具" class="headerlink" title="3. mkfs&#x2F; 目录 - 文件系统工具"></a>3. mkfs&#x2F; 目录 - 文件系统工具</h3><ul><li>mkfs.c - 创建xv6文件系统镜像的工具</li></ul><h3 id="4-conf-目录-配置文件"><a href="#4-conf-目录-配置文件" class="headerlink" title="4. conf&#x2F; 目录 - 配置文件"></a>4. conf&#x2F; 目录 - 配置文件</h3><ul><li>lab.mk - 实验配置的Makefile片段</li></ul><h3 id="5-根目录文件"><a href="#5-根目录文件" class="headerlink" title="5. 根目录文件"></a>5. 根目录文件</h3><ul><li><p>Makefile - 主构建文件</p></li><li><p>README - 项目说明文档</p></li><li><p>LICENSE - 许可证文件</p></li><li><p>test-xv6.py - 自动化测试脚本</p></li><li><p>grade-lab-util - 实验评分脚本</p></li><li><p>gradelib.py - 评分库</p></li></ul><h1 id="Lab1-Unix-utilities"><a href="#Lab1-Unix-utilities" class="headerlink" title="Lab1:Unix utilities"></a>Lab1:Unix utilities</h1><p>1.添加sleep系统调用</p><ul><li>kernel&#x2F;syscall.h：新增系统调用号，添加 #define SYS_sleep <n>（选择未占用的编号，保持与现有顺序一致）</n></li><li>kernel&#x2F;syscall.c：注册分发入口，声明 extern uint64 sys_sleep(void);，在 static uint64 (*syscalls[])(void) 表中加入 [SYS_sleep] &#x3D; sys_sleep（修改：把SYS_sleep映射到sys_pause)</li><li>kernel&#x2F;sysproc.c：实现内核侧处理函数，实现 uint64 sys_sleep(void)：，用 argint(0, &amp;n) 取参数，读取并比较 ticks，在 tickslock 下调用 sleep(&amp;ticks, &amp;tickslock) 等待，处理中途被 killed 的情况，返回 -1 或 0，提醒：sleep(void *chan, struct spinlock *lk) 在 kernel&#x2F;proc.c 已实现，可直接复用</li><li>user&#x2F;user.h：声明用户态原型，添加 int sleep(int);，user&#x2F;usys.pl：生成用户态封装（a0 放参数，a7 放号，执行 ecall）</li><li>在函数列表中加入 sleep，以便生成 usys.S 对应封装</li><li>（可选）如果项目里有手写用户态封装而非 usys.pl 生成：</li><li>user&#x2F;usys.S：手动新增 sleep 的封装（通常不需要，make 会由 usys.pl 自动生成），（无需修改）陷阱&#x2F;返回路径</li><li>kernel&#x2F;trap.c、kernel&#x2F;trampoline.S 无需改动，sleep 走标准系统调用路径即可</li></ul><p>2.添加sixfive命令</p><p>在user&#x2F;sixfive.c写sixfive函数，修改Makefile,添加到 <code>UPROGS</code> </p><p>3.memdump</p><p>在user&#x2F;memdump.c写memedump函数，修改Makefile添加到 <code>UPROGS</code> </p><p>4.find</p><ol><li>打开与获取文件类型</li></ol><ul><li><p>用 open(path, O_RDONLY) 打开路径，失败就报错返回。</p></li><li><p>用 fstat(fd, &amp;st) 获取该路径对应的 struct stat，以判断类型（文件&#x2F;设备&#x2F;目录）。</p></li></ul><ol start="2"><li>处理“文件&#x2F;设备”节点：只比较最后一段名字</li></ol><ul><li><p>如果是 T_FILE 或 T_DEVICE，取出 path 的最后一段名字（从末尾往前找到最后一个 &#x2F; 后的子串）。</p></li><li><p>若该名字与 target 相等，打印整条 path。</p></li></ul><ol start="3"><li>处理目录：遍历目录项并递归</li></ol><ul><li><p>先检查拼接子路径是否会超过临时缓冲区 char buf[512] 的容量：strlen(path) + 1 + DIRSIZ + 1。</p></li><li><p>将 path 复制到 buf，在末尾加上 ‘&#x2F;‘，指针 p 指向可写入子名的位置。</p></li><li><p>通过 read(fd, &amp;de, sizeof(de)) 逐条读取目录项 struct dirent de：</p></li><li><p>跳过 de.inum &#x3D;&#x3D; 0 的空项。</p></li><li><p>用 memmove(p, de.name, DIRSIZ); p[DIRSIZ]&#x3D;0; 把该目录项的名字接到 buf 后，形成形如 buf &#x3D; “<parent>&#x2F;<entry>“ 的完整路径。</entry></parent></p></li><li><p>跳过名字为 “.” 和 “..”（避免无限递归）。</p></li><li><p>调用 stat(buf, &amp;st) 获取该子路径的类型：</p></li><li><p>若是目录，递归调用 find(buf, target)。</p></li><li><p>若是文件&#x2F;设备，直接比较当前名字 p 是否等于 target，相等则打印 buf。</p></li></ul><p>\4) 边界和健壮性</p><ul><li><p>路径过长时打印 “find: path too long”。</p></li><li><p>open&#x2F;fstat&#x2F;stat 失败时打印错误并跳过。</p></li><li><p>每个 open 最后都 close(fd)，避免资源泄露。</p><p>为什么要跳过 “.” 和 “..”,“.” 指向当前目录，“..” 指向父目录；如果递归进入它们会导致死循环（在当前目录与父目录之间来回）。</p></li></ul><p>5.exec</p><p>find.c添加：</p><ul><li>参数组装：</li><li>将 -exec 后的命令及其参数复制到 argv。</li><li>把“匹配到的完整文件路径”作为最后一个参数自动追加到 argv，并以 0 结尾。</li><li>有 MAXARG 限制，若命令参数太多会报错并跳过执行。</li><li>执行模型：</li><li>fork() 子进程，子进程 exec(argv[0], argv) 运行命令。</li><li>父进程 wait(0) 等待，故对每个匹配都是顺序、同步执行（不并行）。</li><li>失败处理：</li><li>fork 失败打印错误并返回。</li><li>exec 失败在子进程内打印错误并 exit(1)。</li></ul><p>可选：</p><p>添加uptime系统调用</p><p>创建user&#x2F;uptime.c</p><p>测试结果</p><p><img src="/2025/09/08/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E8%AE%BE%E8%AE%A1%E5%AE%9E%E8%B7%B5/image-20250911083446998.png" alt="image-20250911083446998"></p><p>Chap4.陷阱的机制，系统调用如何执行，如何传参</p><p>Chap5.缺页中断</p><p>Chap6.硬件</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> xv6 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>LILCTF-Re&amp;Crypto</title>
       <link href="/2025/08/18/LILCTF-Re-Crypto/"/>
       <url>/2025/08/18/LILCTF-Re-Crypto/</url>
@@ -343,9 +368,9 @@
       
         <tags>
             
-            <tag> Re </tag>
-            
             <tag> wp </tag>
+            
+            <tag> Re </tag>
             
         </tags>
       
@@ -420,9 +445,9 @@
       
         <tags>
             
-            <tag> Re </tag>
-            
             <tag> wp </tag>
+            
+            <tag> Re </tag>
             
         </tags>
       
