@@ -6,7 +6,7 @@
   <link href="https://xinyi234.github.io/atom.xml" rel="self"/>
   
   <link href="https://xinyi234.github.io/"/>
-  <updated>2026-01-03T15:43:56.571Z</updated>
+  <updated>2026-02-01T16:06:17.992Z</updated>
   <id>https://xinyi234.github.io/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>unity游戏逆向</title>
+    <link href="https://xinyi234.github.io/2026/02/01/unity%E6%B8%B8%E6%88%8F%E9%80%86%E5%90%91/"/>
+    <id>https://xinyi234.github.io/2026/02/01/unity%E6%B8%B8%E6%88%8F%E9%80%86%E5%90%91/</id>
+    <published>2026-02-01T08:32:00.000Z</published>
+    <updated>2026-02-01T16:06:17.992Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;最近写了unictf的两道unity逆向题，借此机会学习一下unity&lt;/p&gt;
+&lt;h1 id=&quot;unity简介&quot;&gt;&lt;a href=&quot;#unity简介&quot; class=&quot;headerlink&quot; title=&quot;unity简介&quot;&gt;&lt;/a&gt;unity简介&lt;/h1&gt;&lt;p&gt;Unity是一种跨平台的游戏开发引擎，主要由C#编写，用来做游戏和交互式应用的一整套开发引擎 + 编辑器，包括程序、美术、音效、物理、动画、打包。与Unreal Engine（虚幻引擎）并称双雄。《原神》、《王者荣耀》、《金铲铲之战》、《纪念碑谷》等手游都是unity开发的。&lt;/p&gt;
+&lt;p&gt;Unity 跨平台 &amp;#x3D;</summary>
+        
+      
+    
+    
+    
+    <category term="Re" scheme="https://xinyi234.github.io/categories/Re/"/>
+    
+    
+    <category term="Re" scheme="https://xinyi234.github.io/tags/Re/"/>
+    
+  </entry>
   
   <entry>
     <title>2025年度总结</title>
@@ -505,34 +532,6 @@
     
     
     <category term="Re" scheme="https://xinyi234.github.io/tags/Re/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>web签个到</title>
-    <link href="https://xinyi234.github.io/2025/03/27/web%E7%AD%BE%E4%B8%AA%E5%88%B0/"/>
-    <id>https://xinyi234.github.io/2025/03/27/web%E7%AD%BE%E4%B8%AA%E5%88%B0/</id>
-    <published>2025-03-27T12:56:39.000Z</published>
-    <updated>2025-06-18T05:04:31.108Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h2 id=&quot;buuctf-ACTF2020-新生赛-Include&quot;&gt;&lt;a href=&quot;#buuctf-ACTF2020-新生赛-Include&quot; class=&quot;headerlink&quot; title=&quot;buuctf[ACTF2020 新生赛]Include&quot;&gt;&lt;/a&gt;buuctf[ACTF2020 新生赛]Include&lt;/h2&gt;&lt;p&gt;打开靶机看到页面只有一个tips&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/2025/03/27/web%E7%AD%BE%E4%B8%AA%E5%88%B0/1.png&quot; alt=&quot;1&quot;&gt;&lt;/p&gt;
-&lt;p&gt;点击一下&lt;/p&gt;
-&lt;p&gt;&lt;img</summary>
-        
-      
-    
-    
-    
-    <category term="web" scheme="https://xinyi234.github.io/categories/web/"/>
-    
-    
-    <category term="签到" scheme="https://xinyi234.github.io/tags/%E7%AD%BE%E5%88%B0/"/>
     
   </entry>
   
