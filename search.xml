@@ -4,6 +4,25 @@
   
     
     <entry>
+      <title>wx小程序</title>
+      <link href="/2026/03/12/wx%E5%B0%8F%E7%A8%8B%E5%BA%8F/"/>
+      <url>/2026/03/12/wx%E5%B0%8F%E7%A8%8B%E5%BA%8F/</url>
+      
+        <content type="html"><![CDATA[<h1 id="抓包"><a href="#抓包" class="headerlink" title="抓包"></a>抓包</h1><p>使用yakit+proxifier可以抓包小程序</p><p>参考<a href="https://www.yaklang.com/wiki/WeChatAppEx/">Yakit 配合 Proxifier 小程序抓包 | Yak Program Language</a></p><p>注意小程序的独立进程是 WeChatAppEx.exe，而不是 WeChat.exe</p><p><img src="/2026/03/12/wx%E5%B0%8F%E7%A8%8B%E5%BA%8F/image-20260312232136398.png" alt="image-20260312232136398"></p><h1 id="解包"><a href="#解包" class="headerlink" title="解包"></a>解包</h1><p>使用的工具：wxapkg(<a href="https://github.com/wux1an/wxapkg">https://github.com/wux1an/wxapkg</a>)</p><p><code>wxapkg.exe scan</code> 命令来扫描所有小程序,<code>wxapkg.exe unpack</code> 命令解包指定小程序</p><p>unveilr(<a href="https://github.com/junxiaqiao/unveilr-v2.0.0">https://github.com/junxiaqiao/unveilr-v2.0.0</a>)</p><p><code>npx unveilr --help</code>命令查看使用方法</p><p>UnpackMiniApp(<a href="https://github.com/Angels-Ray/UnpackMiniApp">https://github.com/Angels-Ray/UnpackMiniApp</a>)</p><p>小程序解密，选择__APP__.wxapkg</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 逆向 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>unity游戏逆向</title>
       <link href="/2026/02/01/unity%E6%B8%B8%E6%88%8F%E9%80%86%E5%90%91/"/>
       <url>/2026/02/01/unity%E6%B8%B8%E6%88%8F%E9%80%86%E5%90%91/</url>
