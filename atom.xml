@@ -6,7 +6,7 @@
   <link href="https://xinyi234.github.io/atom.xml" rel="self"/>
   
   <link href="https://xinyi234.github.io/"/>
-  <updated>2026-03-13T03:54:29.074Z</updated>
+  <updated>2026-04-01T16:33:14.371Z</updated>
   <id>https://xinyi234.github.io/</id>
   
   <author>
@@ -15,6 +15,53 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>虚仿平台</title>
+    <link href="https://xinyi234.github.io/2026/04/02/%E8%99%9A%E4%BB%BF%E5%B9%B3%E5%8F%B0/"/>
+    <id>https://xinyi234.github.io/2026/04/02/%E8%99%9A%E4%BB%BF%E5%B9%B3%E5%8F%B0/</id>
+    <published>2026-04-01T16:30:20.000Z</published>
+    <updated>2026-04-01T16:33:14.371Z</updated>
+    
+    
+    <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
+    
+    
+    
+    <category term="渗透" scheme="https://xinyi234.github.io/categories/%E6%B8%97%E9%80%8F/"/>
+    
+    
+    <category term="pentest" scheme="https://xinyi234.github.io/tags/pentest/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>flare-on-12</title>
+    <link href="https://xinyi234.github.io/2026/03/13/flare-on-12/"/>
+    <id>https://xinyi234.github.io/2026/03/13/flare-on-12/</id>
+    <published>2026-03-13T12:58:24.000Z</published>
+    <updated>2026-03-13T15:36:50.378Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;&lt;a href=&quot;http://flare-on.com/&quot;&gt;The Flare-On Challenge&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&quot;1-DrillBabyDrill&quot;&gt;&lt;a href=&quot;#1-DrillBabyDrill&quot; class=&quot;headerlink&quot; title=&quot;1 - DrillBabyDrill&quot;&gt;&lt;/a&gt;1 - DrillBabyDrill&lt;/h1&gt;&lt;p&gt;题目是python打包的exe，并给了源码，直接看py文件&lt;/p&gt;
+&lt;p&gt;找到生成flag的函数&lt;/p&gt;
+&lt;figure class=&quot;highlight python&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td</summary>
+        
+      
+    
+    
+    
+    <category term="Re" scheme="https://xinyi234.github.io/categories/Re/"/>
+    
+    
+    <category term="Re" scheme="https://xinyi234.github.io/tags/Re/"/>
+    
+  </entry>
   
   <entry>
     <title>wx小程序</title>
@@ -479,55 +526,6 @@
     
     
     <category term="复习" scheme="https://xinyi234.github.io/tags/%E5%A4%8D%E4%B9%A0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>数据库系统</title>
-    <link href="https://xinyi234.github.io/2025/06/03/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F/"/>
-    <id>https://xinyi234.github.io/2025/06/03/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%B3%BB%E7%BB%9F/</id>
-    <published>2025-06-03T06:06:11.000Z</published>
-    <updated>2025-06-19T08:26:00.420Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;数据库&quot;&gt;&lt;a href=&quot;#数据库&quot; class=&quot;headerlink&quot; title=&quot;数据库&quot;&gt;&lt;/a&gt;数据库&lt;/h1&gt;&lt;p&gt;参考&lt;a href=&quot;https://superpung.notion.site/6c01057bb5c4474d9849b9df8e759bc1&quot;&gt;https://superpung.notion.site/6c01057bb5c4474d9849b9df8e759bc1&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;2025.6.19&lt;/p&gt;
-&lt;p&gt;呜呜呜考的好烂😫下次一定好好复习）索引查询代价一定要看&lt;/p&gt;
-&lt;h2 id=&quot;关系数据模型&quot;&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="复习" scheme="https://xinyi234.github.io/categories/%E5%A4%8D%E4%B9%A0/"/>
-    
-    
-    <category term="复习" scheme="https://xinyi234.github.io/tags/%E5%A4%8D%E4%B9%A0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ISCC2025</title>
-    <link href="https://xinyi234.github.io/2025/05/09/ISCC2025/"/>
-    <id>https://xinyi234.github.io/2025/05/09/ISCC2025/</id>
-    <published>2025-05-09T00:45:27.000Z</published>
-    <updated>2025-07-20T09:50:48.484Z</updated>
-    
-    
-    <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
-    
-    
-    
-    <category term="Re" scheme="https://xinyi234.github.io/categories/Re/"/>
-    
-    
-    <category term="Re" scheme="https://xinyi234.github.io/tags/Re/"/>
-    
-    <category term="wp" scheme="https://xinyi234.github.io/tags/wp/"/>
     
   </entry>
   
