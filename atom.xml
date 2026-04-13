@@ -6,7 +6,7 @@
   <link href="https://xinyi234.github.io/atom.xml" rel="self"/>
   
   <link href="https://xinyi234.github.io/"/>
-  <updated>2026-04-01T16:33:14.371Z</updated>
+  <updated>2026-04-13T00:53:02.398Z</updated>
   <id>https://xinyi234.github.io/</id>
   
   <author>
@@ -15,6 +15,50 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>FlareSolverr Server-Side Request Forgery (SSRF) Vulnerability Report</title>
+    <link href="https://xinyi234.github.io/2026/04/13/FlareSolverr-Server-Side-Request-Forgery-SSRF-Vulnerability-Report/"/>
+    <id>https://xinyi234.github.io/2026/04/13/FlareSolverr-Server-Side-Request-Forgery-SSRF-Vulnerability-Report/</id>
+    <published>2026-04-13T00:46:45.000Z</published>
+    <updated>2026-04-13T00:53:02.398Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;FlareSolverr-Server-Side-Request-Forgery-SSRF-Vulnerability-Report&quot;&gt;&lt;a href=&quot;#FlareSolverr-Server-Side-Request-Forgery-SSRF-Vulnerability-Report&quot; class=&quot;headerlink&quot; title=&quot;FlareSolverr Server-Side Request Forgery (SSRF) Vulnerability Report&quot;&gt;&lt;/a&gt;&lt;strong&gt;FlareSolverr Server-Side Request</summary>
+        
+      
+    
+    
+    
+    <category term="bugs" scheme="https://xinyi234.github.io/categories/bugs/"/>
+    
+    
+    <category term="report" scheme="https://xinyi234.github.io/tags/report/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>腾讯游戏安全技术竞赛PC端初赛</title>
+    <link href="https://xinyi234.github.io/2026/04/11/%E8%85%BE%E8%AE%AF%E6%B8%B8%E6%88%8F%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF%E7%AB%9E%E8%B5%9BPC%E7%AB%AF%E5%88%9D%E8%B5%9B/"/>
+    <id>https://xinyi234.github.io/2026/04/11/%E8%85%BE%E8%AE%AF%E6%B8%B8%E6%88%8F%E5%AE%89%E5%85%A8%E6%8A%80%E6%9C%AF%E7%AB%9E%E8%B5%9BPC%E7%AB%AF%E5%88%9D%E8%B5%9B/</id>
+    <published>2026-04-11T14:11:55.000Z</published>
+    <updated>2026-04-13T01:12:09.583Z</updated>
+    
+    
+    <summary type="html">Here&#39;s something encrypted, password is required to continue reading.</summary>
+    
+    
+    
+    <category term="Re" scheme="https://xinyi234.github.io/categories/Re/"/>
+    
+    
+    <category term="Re" scheme="https://xinyi234.github.io/tags/Re/"/>
+    
+  </entry>
   
   <entry>
     <title>虚仿平台</title>
@@ -470,62 +514,6 @@
     
     
     <category term="渗透" scheme="https://xinyi234.github.io/tags/%E6%B8%97%E9%80%8F/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>云镜-Initial</title>
-    <link href="https://xinyi234.github.io/2025/06/13/%E4%BA%91%E9%95%9C-Initial/"/>
-    <id>https://xinyi234.github.io/2025/06/13/%E4%BA%91%E9%95%9C-Initial/</id>
-    <published>2025-06-13T08:59:59.000Z</published>
-    <updated>2025-07-14T15:20:05.306Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;第一次打靶场，第一次接触内网渗透，做的过程中看了很多大佬的wp，感谢:）&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://blog.csdn.net/uuzeray/article/details/141316323&quot;&gt;https://blog.csdn.net/uuzeray/article/details/141316323&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a href=&quot;https://xz.aliyun.com/news/11561&quot;&gt;https://xz.aliyun.com/news/11561&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a</summary>
-        
-      
-    
-    
-    
-    <category term="渗透" scheme="https://xinyi234.github.io/categories/%E6%B8%97%E9%80%8F/"/>
-    
-    
-    <category term="云镜" scheme="https://xinyi234.github.io/tags/%E4%BA%91%E9%95%9C/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>计算机网络</title>
-    <link href="https://xinyi234.github.io/2025/06/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"/>
-    <id>https://xinyi234.github.io/2025/06/09/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</id>
-    <published>2025-06-09T05:46:44.000Z</published>
-    <updated>2025-06-20T03:42:41.929Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;p&gt;2025.6.19 明天就考试了，怎么办怎么办(慌)&lt;/p&gt;
-&lt;p&gt;最基础的知识点了&lt;/p&gt;
-&lt;p&gt;往年题&lt;a href=&quot;https://xyy9233.github.io/2024/12/16/ji-wang/&quot;&gt;https://xyy9233.github.io/2024/12/16/ji-wang/&lt;/a&gt;  🥰伟大&lt;/p&gt;
-&lt;h1 id=&quot;第一章&quot;&gt;&lt;a href=&quot;#第一章&quot; class=&quot;headerlink&quot;</summary>
-        
-      
-    
-    
-    
-    <category term="复习" scheme="https://xinyi234.github.io/categories/%E5%A4%8D%E4%B9%A0/"/>
-    
-    
-    <category term="复习" scheme="https://xinyi234.github.io/tags/%E5%A4%8D%E4%B9%A0/"/>
     
   </entry>
   
